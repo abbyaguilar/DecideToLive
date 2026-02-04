@@ -1,0 +1,97 @@
+:root {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+  font-weight: 400;
+
+  --bg: #fbf7f0;
+  --panel: rgba(255, 255, 255, 0.82);
+  --panel-solid: #ffffff;
+  --text: #121212;
+  --muted: rgba(18, 18, 18, 0.72);
+  --border: rgba(18, 18, 18, 0.10);
+  --shadow: 0 14px 40px rgba(18, 18, 18, 0.08);
+
+  --btn: #141414;
+  --btnText: #ffffff;
+  --btnHover: #0f0f0f;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--text);
+  display: block;
+
+  /* cohesive ombre + soft highlight that will NOT repeat */
+  background:
+    radial-gradient(1200px 700px at 18% 10%, rgba(243, 234, 220, 0.85) 0%, rgba(251, 247, 240, 0.25) 55%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, #faf9f6 0%, #f4efe8 35%, #efe7de 65%, #e8dfd4 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+/* subtle, non-blue links */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(18, 18, 18, 0.25);
+  text-underline-offset: 4px;
+}
+a:hover {
+  text-decoration-color: rgba(18, 18, 18, 0.55);
+}
+
+/* clean buttons */
+button {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--panel-solid);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 0.05s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button:hover {
+  border-color: rgba(18, 18, 18, 0.18);
+  box-shadow: 0 10px 24px rgba(18, 18, 18, 0.08);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(18, 18, 18, 0.20);
+  outline-offset: 3px;
+}
+
+/* responsive helper if you use .stack */
+@media (max-width: 920px) {
+  .stack {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 820px) {
+  .tilesGridFix {
+    grid-template-columns: 1fr !important;
+  }
+}
