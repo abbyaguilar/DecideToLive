@@ -228,8 +228,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                 </div>
 
                 <div style={styles.footerLinks}>
-                    <a href="/privacy" style={styles.footerLink}>Privacy Policy</a>
-                    <a href="/terms" style={styles.footerLink}>Terms</a>
+                    <Link href="/privacy" style={styles.footerLink}>Privacy Policy</Link>
+                    <Link href="/terms" style={styles.footerLink}>Terms</Link>
                     <a href="#" style={styles.footerLink} onClick={(e) => { e.preventDefault(); scrollToId("top"); }}>
                         Back to top
                     </a>
