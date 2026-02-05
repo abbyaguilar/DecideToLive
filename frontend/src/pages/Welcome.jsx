@@ -1,350 +1,126 @@
-import React, { useEffect } from "react";
-import previewImg from "../assets/assessment-preview-horizontal.png";
-
-const BEEHIIV_FORM_URL =
-    "https://subscribe-forms.beehiiv.com/9a22dc77-4e7b-4fb7-9151-6033aea1c5c8";
-
-export default function Welcome({ title, subtitle, onStart }) {
-    useEffect(() => {
-        if (!document.getElementById("beehiiv-embed-js")) {
-            const s = document.createElement("script");
-            s.id = "beehiiv-embed-js";
-            s.async = true;
-            s.src = "https://subscribe-forms.beehiiv.com/embed.js";
-            document.body.appendChild(s);
-        }
-    }, []);
+// Terms.jsx
+export default function Terms() {
+    const updated = new Date().toLocaleDateString();
 
     return (
+        <main className="min-h-screen bg-neutral-50 text-neutral-900">
+            <div className="mx-auto max-w-3xl px-6 py-14">
+                <header className="mb-10">
+                    <p className="text-sm text-neutral-500">Last updated: {updated}</p>
+                    <h1 className="mt-3 text-4xl font-semibold tracking-tight">Terms of Use</h1>
+                    <p className="mt-4 text-neutral-700 leading-relaxed">
+                        Decide to Live provides educational content related to health, lifestyle, and longevity.
+                        By accessing or using this site, you agree to these Terms of Use.
+                    </p>
+                </header>
 
-        <div style={styles.wrap}>
-            <header style={styles.header}>
-                <div style={styles.brandRow}>
-                    <div style={styles.badge}>Research informed longevity tool</div>
-                    <div style={styles.brandName}>Decide to Live</div>
-                </div>
+                <section className="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-neutral-200">
+                    <h2 className="text-xl font-semibold">Educational use only (not medical advice)</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        The site and any quizzes/assessments are provided for informational and educational purposes only.
+                        They are not medical advice, do not diagnose or treat any condition, and do not create a
+                        doctor–patient relationship. Always seek guidance from a licensed healthcare professional for
+                        medical questions.
+                    </p>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        If you think you may be experiencing a medical emergency, call local emergency services immediately.
+                    </p>
 
-                <h1 style={styles.h1}>Longevity Assessment</h1>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                <p style={styles.sub}>
-                    A structured overview of factors associated with longevity and preparedness.
-                    Clear, neutral, and designed for responsible planning.
-                </p>
-            </header>
+                    <h2 className="text-xl font-semibold">Research summaries and “healthy/unhealthy” labels</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        References to “healthy” or “unhealthy” habits and any scoring or assessments reflect population-level
+                        research associations and summaries of published studies. Research evolves and may change over time.
+                        Individual outcomes vary widely, and nothing on this site is a prediction or personalized recommendation.
+                    </p>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        Links to third-party studies and resources are provided for convenience. We do not control third-party
+                        websites and are not responsible for their content, accuracy, availability, or practices.
+                    </p>
 
-            <section style={styles.hero}>
-                <div style={styles.sectionTitle}>What you will receive</div>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                {/* 🔹 ASSESSMENT PREVIEW */}
-                <div style={styles.previewCard}>
-                    <img
-                        src={previewImg}
-                        alt="Sample assessment view"
-                        style={styles.previewImg}
-                    />
-                    <div style={styles.previewCaption}>
-                        Sample assessment view
-                    </div>
-                </div>
+                    <h2 className="text-xl font-semibold">No guarantees</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        We make no warranties or guarantees about accuracy, completeness, or results. Your use of the site is at
+                        your own risk.
+                    </p>
 
-                <div style={styles.bullets}>
-                    <Bullet
-                        title="Short questionnaire"
-                        body="Approximately three to five minutes."
-                    />
-                    <Bullet
-                        title="Evidence informed insights"
-                        body="Results summarize population patterns and research associations. They do not predict individual outcomes."
-                    />
-                    <Bullet
-                        title="Practical clarity"
-                        body="Identify where risk may be reduced and where preparation may be appropriate."
-                    />
-                </div>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                <div style={styles.actions}>
-                    <button onClick={onStart} style={styles.primary}>
-                        Start assessment
-                    </button>
+                    <h2 className="text-xl font-semibold">Limitation of liability</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        To the fullest extent permitted by law, Decide to Live and its owners, contributors, and partners will not
+                        be liable for any direct, indirect, incidental, special, or consequential damages arising out of or related
+                        to your use of the site, including reliance on any content, results, or linked resources.
+                    </p>
 
-                    <div style={styles.micro}>
-                        Informational only. Not medical advice. Not financial advice.
-                    </div>
-                </div>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                <div style={styles.schemaLine}>
-                    <span style={styles.schemaLabel}>Loaded schema</span>
-                    <span style={styles.schemaValue}>
-                        {title || "Reflection"} {subtitle ? `• ${subtitle}` : ""}
-                    </span>
-                </div>
-            </section>
+                    <h2 className="text-xl font-semibold">Third-party services and infrastructure</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        The site may rely on third-party service providers to operate. For example:
+                    </p>
+                    <ul className="mt-3 space-y-2 text-neutral-700 leading-relaxed list-disc pl-5">
+                        <li>
+                            <span className="font-medium">Vercel</span> may host the front-end website and may process basic technical
+                            data (such as request logs) to deliver the site.
+                        </li>
+                        <li>
+                            <span className="font-medium">Render</span> may host the back-end API (Flask) and may process basic technical
+                            data (such as server logs) to provide the service.
+                        </li>
+                        <li>
+                            <span className="font-medium">Beehiiv</span> (or a similar email provider) may process newsletter subscriptions
+                            and deliver emails.
+                        </li>
+                    </ul>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        These providers may process information as described in our Privacy Policy. Your use of the site may also be
+                        subject to those providers’ terms and policies.
+                    </p>
 
-            {/* WHAT THIS IS / IS NOT */}
-            <section style={styles.tiles}>
-                <div style={styles.tile}>
-                    <div style={styles.tileLabel}>What this is</div>
-                    <div style={styles.tileValue}>
-                        A structured assessment informed by public health and behavioral research,
-                        presented in plain language.
-                    </div>
-                </div>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                <div style={styles.tile}>
-                    <div style={styles.tileLabel}>What this is not</div>
-                    <div style={styles.tileValue}>
-                        A prediction tool. Medical advice. Financial advice.
-                    </div>
-                </div>
-            </section>
+                    <h2 className="text-xl font-semibold">Newsletter</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        If you subscribe to the newsletter, you consent to receive emails about educational content and site updates.
+                        You can unsubscribe at any time using the link in any newsletter email.
+                    </p>
 
-            {/* NEWSLETTER — BOTTOM, QUIET */}
-            <section style={styles.newsletter}>
-                <div style={styles.tileLabel}>Monthly research letter</div>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                <div style={styles.newsletterCopy}>
-                    One monthly email with new longevity research, clear summaries, and practical habits.
-                    Unsubscribe anytime.
-                </div>
+                    <h2 className="text-xl font-semibold">Changes</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        We may update these Terms from time to time. Continued use of the site after changes means you accept the
+                        updated Terms.
+                    </p>
 
-                <div style={styles.embedShell}>
-                    <iframe
-                        src={BEEHIIV_FORM_URL}
-                        className="beehiiv-embed"
-                        title="Decide to Live newsletter signup"
-                        frameBorder="0"
-                        scrolling="no"
-                        style={styles.embedFrame}
-                    />
-                </div>
+                    <div className="my-8 h-px bg-neutral-200" />
 
-                <div style={styles.newsletterFinePrint}>
-                    Signup is hosted by Beehiiv for deliverability and unsubscribe compliance.
-                </div>
-            </section>
-        </div>
-    );
-}
+                    <h2 className="text-xl font-semibold">Contact</h2>
+                    <p className="mt-3 text-neutral-700 leading-relaxed">
+                        Questions about these Terms can be sent to{" "}
+                        <a
+                            href="mailto:decidetolive.news@gmail.com"
+                            className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-600"
+                        >
+                            decidetolive.news@gmail.com
+                        </a>
+                        .
+                    </p>
 
-function Bullet({ title, body }) {
-    return (
-        <div style={styles.bullet}>
-            <div style={styles.dot} />
-            <div>
-                <div style={styles.bulletTitle}>{title}</div>
-                <div style={styles.bulletBody}>{body}</div>
+                    <p className="mt-6 text-sm text-neutral-500 leading-relaxed">
+                        This page is a general template and should be reviewed by legal counsel to ensure compliance with your specific
+                        features, data practices, and applicable laws.
+                    </p>
+                </section>
+
+                <footer className="mt-10 text-sm text-neutral-500">
+                    © {new Date().getFullYear()} Decide to Live
+                </footer>
             </div>
-        </div>
+        </main>
     );
 }
-
-const styles = {
-    wrap: { paddingTop: 20 },
-    header: { marginBottom: 20 },
-
-    brandRow: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: 12,
-    },
-
-    badge: {
-        padding: "6px 10px",
-        borderRadius: 999,
-        border: "1px solid var(--border)",
-        background: "rgba(255,255,255,0.6)",
-        fontSize: 12,
-        color: "var(--muted)",
-    },
-
-    brandName: {
-        fontSize: 12,
-        letterSpacing: 0.6,
-        textTransform: "uppercase",
-        color: "var(--muted)",
-    },
-
-    h1: {
-        fontSize: 44,
-        margin: "14px 0 8px",
-        letterSpacing: -0.8,
-    },
-
-    sub: {
-        maxWidth: 760,
-        fontSize: 16,
-        color: "var(--muted)",
-        lineHeight: 1.6,
-    },
-
-    hero: {
-        borderRadius: 18,
-        padding: 18,
-        border: "1px solid var(--border)",
-        background: "var(--panel)",
-        boxShadow: "var(--shadow)",
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-    },
-
-    sectionTitle: {
-        fontSize: 12,
-        textTransform: "uppercase",
-        letterSpacing: 0.5,
-        color: "var(--muted)",
-    },
-
-    previewCard: {
-        borderRadius: 16,
-        border: "1px solid rgba(18,18,18,0.08)",
-        background: "rgba(250,249,246,0.65)",
-        padding: 14,
-    },
-
-    previewImg: {
-        width: "100%",
-        borderRadius: 12,
-        display: "block",
-    },
-
-    previewCaption: {
-        marginTop: 8,
-        fontSize: 12,
-        color: "rgba(18,18,18,0.6)",
-        textAlign: "center",
-    },
-
-    bullets: {
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-    },
-
-    bullet: {
-        display: "flex",
-        gap: 10,
-        padding: 12,
-        borderRadius: 14,
-        background: "rgba(250,249,246,0.65)",
-        border: "1px solid rgba(18,18,18,0.08)",
-    },
-
-    dot: {
-        width: 10,
-        height: 10,
-        borderRadius: 999,
-        background: "rgba(205,191,168,1)",
-        marginTop: 6,
-    },
-
-    bulletTitle: {
-        fontSize: 14,
-        color: "rgba(18,18,18,0.92)",
-    },
-
-    bulletBody: {
-        fontSize: 13,
-        color: "var(--muted)",
-        marginTop: 2,
-    },
-
-    actions: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: 12,
-    },
-
-    primary: {
-        background: "var(--btn)",
-        color: "var(--btnText)",
-        padding: "11px 16px",
-        borderRadius: 12,
-        border: "1px solid rgba(18,18,18,0.12)",
-        boxShadow: "0 10px 22px rgba(18,18,18,0.14)",
-    },
-
-    micro: {
-        fontSize: 12,
-        color: "var(--muted)",
-    },
-
-    schemaLine: {
-        fontSize: 12,
-        color: "var(--muted)",
-        display: "flex",
-        gap: 8,
-        flexWrap: "wrap",
-    },
-
-    schemaLabel: {
-        padding: "4px 8px",
-        borderRadius: 999,
-        border: "1px solid rgba(18,18,18,0.08)",
-        background: "rgba(255,255,255,0.5)",
-    },
-
-    tiles: {
-        marginTop: 16,
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-        gap: 12,
-    },
-
-    tile: {
-        borderRadius: 16,
-        padding: 14,
-        border: "1px solid rgba(18,18,18,0.1)",
-        background: "rgba(255,255,255,0.55)",
-    },
-
-    tileLabel: {
-        fontSize: 12,
-        textTransform: "uppercase",
-        letterSpacing: 0.4,
-        color: "var(--muted)",
-        marginBottom: 6,
-    },
-
-    tileValue: {
-        fontSize: 14,
-        lineHeight: 1.5,
-    },
-
-    newsletter: {
-        marginTop: 18,
-        borderRadius: 16,
-        padding: 16,
-        border: "1px solid rgba(18,18,18,0.1)",
-        background: "rgba(255,255,255,0.55)",
-    },
-
-    newsletterCopy: {
-        fontSize: 14,
-        marginBottom: 12,
-        color: "rgba(18,18,18,0.8)",
-    },
-
-    embedShell: {
-        maxWidth: 520,
-        margin: "0 auto",
-    },
-
-    embedFrame: {
-        width: "100%",
-        height: 190,
-        borderRadius: 16,
-        backgroundColor: "transparent",
-    },
-
-    newsletterFinePrint: {
-        marginTop: 10,
-        fontSize: 12,
-        color: "rgba(18,18,18,0.6)",
-        textAlign: "center",
-    },
-};
