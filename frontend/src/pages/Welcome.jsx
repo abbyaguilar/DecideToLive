@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useEffect, useMemo, useState } from "react";
 import previewImg from "../assets/assessment-preview-horizontal.png";
 
@@ -227,8 +228,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                 </div>
 
                 <div style={styles.footerLinks}>
-                    <a href="/Privacy" style={styles.footerLink}>Privacy Policy</a>
-                    <a href="/Terms" style={styles.footerLink}>Terms</a>
+                    <a href="/privacy" style={styles.footerLink}>Privacy Policy</a>
+                    <a href="/terms" style={styles.footerLink}>Terms</a>
                     <a href="#" style={styles.footerLink} onClick={(e) => { e.preventDefault(); scrollToId("top"); }}>
                         Back to top
                     </a>
