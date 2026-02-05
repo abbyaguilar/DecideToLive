@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from "react";
-import previewImg from "../assets/assessment-preview.png";
+import React, { useEffect } from "react";
+import previewImg from "../assets/assessment-preview-horizontal.png";
 
 const BEEHIIV_FORM_URL =
     "https://subscribe-forms.beehiiv.com/9a22dc77-4e7b-4fb7-9151-6033aea1c5c8";
 
 export default function Welcome({ title, subtitle, onStart }) {
-    const [isMobile, setIsMobile] = useState(
-        typeof window !== "undefined" ? window.innerWidth <= 820 : false
-    );
-
     useEffect(() => {
-        function onResize() {
-            setIsMobile(window.innerWidth <= 820);
-        }
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
-    }, []);
-
-    useEffect(() => {
-        // Beehiiv embed sizing/behavior
         if (!document.getElementById("beehiiv-embed-js")) {
             const s = document.createElement("script");
             s.id = "beehiiv-embed-js";
@@ -47,44 +34,31 @@ export default function Welcome({ title, subtitle, onStart }) {
             <section style={styles.hero}>
                 <div style={styles.sectionTitle}>What you will receive</div>
 
-                {/* Smaller, centered preview card */}
+                {/* 🔹 ASSESSMENT PREVIEW */}
                 <div style={styles.previewCard}>
                     <img
                         src={previewImg}
-                        alt="Assessment preview"
+                        alt="Sample assessment view"
                         style={styles.previewImg}
                     />
+                    <div style={styles.previewCaption}>
+                        Sample assessment view
+                    </div>
                 </div>
 
                 <div style={styles.bullets}>
-                    <div style={styles.bullet}>
-                        <div style={styles.dot} />
-                        <div>
-                            <div style={styles.bulletTitle}>Short questionnaire</div>
-                            <div style={styles.bulletBody}>Approximately three to five minutes.</div>
-                        </div>
-                    </div>
-
-                    <div style={styles.bullet}>
-                        <div style={styles.dot} />
-                        <div>
-                            <div style={styles.bulletTitle}>Evidence informed insights</div>
-                            <div style={styles.bulletBody}>
-                                Results summarize population patterns and research associations.
-                                They do not predict individual outcomes.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={styles.bullet}>
-                        <div style={styles.dot} />
-                        <div>
-                            <div style={styles.bulletTitle}>Practical clarity</div>
-                            <div style={styles.bulletBody}>
-                                Identify where risk may be reduced and where preparation may be appropriate.
-                            </div>
-                        </div>
-                    </div>
+                    <Bullet
+                        title="Short questionnaire"
+                        body="Approximately three to five minutes."
+                    />
+                    <Bullet
+                        title="Evidence informed insights"
+                        body="Results summarize population patterns and research associations. They do not predict individual outcomes."
+                    />
+                    <Bullet
+                        title="Practical clarity"
+                        body="Identify where risk may be reduced and where preparation may be appropriate."
+                    />
                 </div>
 
                 <div style={styles.actions}>
@@ -100,13 +74,13 @@ export default function Welcome({ title, subtitle, onStart }) {
                 <div style={styles.schemaLine}>
                     <span style={styles.schemaLabel}>Loaded schema</span>
                     <span style={styles.schemaValue}>
-                        {title ? title : "Reflection"} {subtitle ? `• ${subtitle}` : ""}
+                        {title || "Reflection"} {subtitle ? `• ${subtitle}` : ""}
                     </span>
                 </div>
             </section>
 
-            {/* Make this a simple 2-up section */}
-            <section style={styles.infoGrid}>
+            {/* WHAT THIS IS / IS NOT */}
+            <section style={styles.tiles}>
                 <div style={styles.tile}>
                     <div style={styles.tileLabel}>What this is</div>
                     <div style={styles.tileValue}>
@@ -123,8 +97,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                 </div>
             </section>
 
-            {/* Newsletter is now its own full-width section at the bottom */}
-            <section style={styles.newsletterSection}>
+            {/* NEWSLETTER — BOTTOM, QUIET */}
+            <section style={styles.newsletter}>
                 <div style={styles.tileLabel}>Monthly research letter</div>
 
                 <div style={styles.newsletterCopy}>
@@ -133,114 +107,113 @@ export default function Welcome({ title, subtitle, onStart }) {
                 </div>
 
                 <div style={styles.embedShell}>
-                    <div style={styles.embedCenter}>
-                        <iframe
-                            src={BEEHIIV_FORM_URL}
-                            className="beehiiv-embed"
-                            data-test-id="beehiiv-embed"
-                            frameBorder="0"
-                            scrolling="no"
-                            title="Decide to Live newsletter signup"
-                            style={{
-                                ...styles.embedFrame,
-                                height: isMobile ? 220 : 185, // match your new embed height + a little mobile cushion
-                            }}
-                        />
-                    </div>
+                    <iframe
+                        src={BEEHIIV_FORM_URL}
+                        className="beehiiv-embed"
+                        title="Decide to Live newsletter signup"
+                        frameBorder="0"
+                        scrolling="no"
+                        style={styles.embedFrame}
+                    />
                 </div>
 
                 <div style={styles.newsletterFinePrint}>
-                    The signup is hosted by Beehiiv for deliverability and unsubscribe compliance.
+                    Signup is hosted by Beehiiv for deliverability and unsubscribe compliance.
                 </div>
             </section>
         </div>
     );
 }
 
+function Bullet({ title, body }) {
+    return (
+        <div style={styles.bullet}>
+            <div style={styles.dot} />
+            <div>
+                <div style={styles.bulletTitle}>{title}</div>
+                <div style={styles.bulletBody}>{body}</div>
+            </div>
+        </div>
+    );
+}
+
 const styles = {
-    wrap: { paddingTop: 18 },
-    header: { marginBottom: 16 },
+    wrap: { paddingTop: 20 },
+    header: { marginBottom: 20 },
 
     brandRow: {
         display: "flex",
-        alignItems: "center",
         justifyContent: "space-between",
-        gap: 12,
+        alignItems: "center",
         flexWrap: "wrap",
+        gap: 12,
     },
 
     badge: {
-        display: "inline-flex",
-        alignItems: "center",
         padding: "6px 10px",
         borderRadius: 999,
         border: "1px solid var(--border)",
-        background: "rgba(255,255,255,0.65)",
-        backdropFilter: "blur(8px)",
+        background: "rgba(255,255,255,0.6)",
         fontSize: 12,
-        letterSpacing: 0.3,
         color: "var(--muted)",
     },
 
     brandName: {
         fontSize: 12,
-        color: "var(--muted)",
         letterSpacing: 0.6,
         textTransform: "uppercase",
-        opacity: 0.8,
+        color: "var(--muted)",
     },
 
     h1: {
-        fontSize: 46,
-        letterSpacing: -0.9,
-        lineHeight: 1.05,
+        fontSize: 44,
         margin: "14px 0 8px",
-        color: "var(--text)",
+        letterSpacing: -0.8,
     },
 
     sub: {
-        margin: 0,
+        maxWidth: 760,
         fontSize: 16,
         color: "var(--muted)",
-        maxWidth: 760,
         lineHeight: 1.6,
     },
 
     hero: {
-        marginTop: 18,
-        padding: 18,
         borderRadius: 18,
+        padding: 18,
         border: "1px solid var(--border)",
         background: "var(--panel)",
         boxShadow: "var(--shadow)",
         display: "flex",
         flexDirection: "column",
-        gap: 14,
+        gap: 16,
     },
 
     sectionTitle: {
         fontSize: 12,
-        letterSpacing: 0.5,
         textTransform: "uppercase",
+        letterSpacing: 0.5,
         color: "var(--muted)",
     },
 
-    // Smaller preview card: cap width and center it
     previewCard: {
         borderRadius: 16,
         border: "1px solid rgba(18,18,18,0.08)",
-        background: "rgba(250, 249, 246, 0.65)",
-        overflow: "hidden",
-        padding: 10,
-        maxWidth: 560,
-        margin: "0 auto",
+        background: "rgba(250,249,246,0.65)",
+        padding: 14,
     },
 
     previewImg: {
         width: "100%",
-        height: "auto",
-        display: "block",
         borderRadius: 12,
+        display: "block",
+    },
+
+    previewCaption: {
+        marginTop: 8,
+        fontSize: 12,
+        color: "rgba(18,18,18,0.6)",
+        textAlign: "center",
     },
 
     bullets: {
@@ -252,11 +225,10 @@ const styles = {
     bullet: {
         display: "flex",
         gap: 10,
-        alignItems: "flex-start",
         padding: 12,
         borderRadius: 14,
+        background: "rgba(250,249,246,0.65)",
         border: "1px solid rgba(18,18,18,0.08)",
-        background: "rgba(250, 249, 246, 0.65)",
     },
 
     dot: {
@@ -264,41 +236,48 @@ const styles = {
         height: 10,
         borderRadius: 999,
         background: "rgba(205,191,168,1)",
-        marginTop: 5,
-        flex: "0 0 auto",
+        marginTop: 6,
     },
 
-    bulletTitle: { fontSize: 14, fontWeight: 520, color: "rgba(18,18,18,0.92)" },
-    bulletBody: { fontSize: 13, color: "var(--muted)", lineHeight: 1.45, marginTop: 2 },
+    bulletTitle: {
+        fontSize: 14,
+        color: "rgba(18,18,18,0.92)",
+    },
+
+    bulletBody: {
+        fontSize: 13,
+        color: "var(--muted)",
+        marginTop: 2,
+    },
 
     actions: {
         display: "flex",
-        alignItems: "center",
         justifyContent: "space-between",
-        gap: 12,
+        alignItems: "center",
         flexWrap: "wrap",
-        marginTop: 2,
+        gap: 12,
     },
 
     primary: {
         background: "var(--btn)",
         color: "var(--btnText)",
-        border: "1px solid rgba(18,18,18,0.12)",
-        boxShadow: "0 10px 22px rgba(18,18,18,0.14)",
         padding: "11px 16px",
         borderRadius: 12,
+        border: "1px solid rgba(18,18,18,0.12)",
+        boxShadow: "0 10px 22px rgba(18,18,18,0.14)",
     },
 
-    micro: { fontSize: 12, color: "var(--muted)", maxWidth: 420, lineHeight: 1.45 },
+    micro: {
+        fontSize: 12,
+        color: "var(--muted)",
+    },
 
     schemaLine: {
         fontSize: 12,
         color: "var(--muted)",
-        opacity: 0.9,
         display: "flex",
         gap: 8,
         flexWrap: "wrap",
-        marginTop: 2,
     },
 
     schemaLabel: {
@@ -308,11 +287,8 @@ const styles = {
         background: "rgba(255,255,255,0.5)",
     },
 
-    schemaValue: { opacity: 0.9 },
-
-    // NEW: 2-up info grid only
-    infoGrid: {
-        marginTop: 14,
+    tiles: {
+        marginTop: 16,
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
         gap: 12,
@@ -320,68 +296,54 @@ const styles = {
 
     tile: {
         borderRadius: 16,
-        border: "1px solid rgba(18, 18, 18, 0.10)",
-        background: "rgba(255,255,255,0.55)",
         padding: 14,
+        border: "1px solid rgba(18,18,18,0.1)",
+        background: "rgba(255,255,255,0.55)",
     },
 
     tileLabel: {
         fontSize: 12,
-        letterSpacing: 0.4,
         textTransform: "uppercase",
+        letterSpacing: 0.4,
         color: "var(--muted)",
         marginBottom: 6,
     },
 
-    tileValue: { fontSize: 14, lineHeight: 1.5, color: "rgba(18,18,18,0.90)" },
+    tileValue: {
+        fontSize: 14,
+        lineHeight: 1.5,
+    },
 
-    // NEW: newsletter moved to bottom as a full-width section
-    newsletterSection: {
-        marginTop: 12,
+    newsletter: {
+        marginTop: 18,
         borderRadius: 16,
-        border: "1px solid rgba(18, 18, 18, 0.10)",
+        padding: 16,
+        border: "1px solid rgba(18,18,18,0.1)",
         background: "rgba(255,255,255,0.55)",
-        padding: 14,
     },
 
     newsletterCopy: {
         fontSize: 14,
-        lineHeight: 1.5,
-        color: "rgba(18,18,18,0.82)",
-        marginTop: 6,
+        marginBottom: 12,
+        color: "rgba(18,18,18,0.8)",
     },
 
     embedShell: {
-        marginTop: 12,
-        borderRadius: 14,
-        border: "1px solid rgba(18,18,18,0.08)",
-        background: "rgba(250, 249, 246, 0.65)",
-        padding: 14,
-    },
-
-    embedCenter: {
         maxWidth: 520,
         margin: "0 auto",
-        display: "flex",
-        justifyContent: "center",
     },
 
-    // Use your new embed sizing feel, but let it be responsive
     embedFrame: {
         width: "100%",
-        maxWidth: 460,        // matches your new embed width, stays centered
-        height: 185,          // matches your embed height
-        margin: 0,
-        borderRadius: 17,
+        height: 190,
+        borderRadius: 16,
         backgroundColor: "transparent",
-        boxShadow: "0 0 #0000",
-        display: "block",
     },
 
     newsletterFinePrint: {
         marginTop: 10,
         fontSize: 12,
-        color: "rgba(18,18,18,0.62)",
-        lineHeight: 1.45,
+        color: "rgba(18,18,18,0.6)",
+        textAlign: "center",
     },
 };
