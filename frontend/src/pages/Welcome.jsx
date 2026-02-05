@@ -18,23 +18,13 @@ export default function Welcome({ title, subtitle, onStart }) {
     }, []);
 
     useEffect(() => {
-        // Required for Beehiiv embed sizing/behavior
+        // Beehiiv embed sizing/behavior
         if (!document.getElementById("beehiiv-embed-js")) {
             const s = document.createElement("script");
             s.id = "beehiiv-embed-js";
             s.async = true;
             s.src = "https://subscribe-forms.beehiiv.com/embed.js";
             document.body.appendChild(s);
-        }
-
-        // Optional: attribution tracking
-        if (!document.getElementById("beehiiv-attribution-js")) {
-            const s2 = document.createElement("script");
-            s2.id = "beehiiv-attribution-js";
-            s2.async = true;
-            s2.type = "text/javascript";
-            s2.src = "https://subscribe-forms.beehiiv.com/attribution.js";
-            document.body.appendChild(s2);
         }
     }, []);
 
@@ -49,102 +39,79 @@ export default function Welcome({ title, subtitle, onStart }) {
                 <h1 style={styles.h1}>Longevity Assessment</h1>
 
                 <p style={styles.sub}>
-                    A structured overview of factors associated with longevity and
-                    preparedness. Clear, neutral, and designed for responsible planning.
+                    A structured overview of factors associated with longevity and preparedness.
+                    Clear, neutral, and designed for responsible planning.
                 </p>
             </header>
 
-            <section
-                style={{
-                    ...styles.hero,
-                    gridTemplateColumns: isMobile ? "1fr" : "1.1fr 0.9fr",
-                }}
-            >
-                <div style={styles.heroText}>
-                    <div style={styles.sectionTitle}>What you will receive</div>
+            <section style={styles.hero}>
+                <div style={styles.sectionTitle}>What you will receive</div>
 
-                    {/* Mobile: show preview image as a horizontal banner ABOVE the bullets */}
-                    {isMobile && (
-                        <div style={{ ...styles.heroImageWrap, padding: 12 }}>
-                            <img
-                                src={previewImg}
-                                alt="Assessment preview"
-                                style={{ ...styles.heroImage, maxWidth: 520 }}
-                            />
+                {/* Smaller, centered preview card */}
+                <div style={styles.previewCard}>
+                    <img
+                        src={previewImg}
+                        alt="Assessment preview"
+                        style={styles.previewImg}
+                    />
+                </div>
+
+                <div style={styles.bullets}>
+                    <div style={styles.bullet}>
+                        <div style={styles.dot} />
+                        <div>
+                            <div style={styles.bulletTitle}>Short questionnaire</div>
+                            <div style={styles.bulletBody}>Approximately three to five minutes.</div>
                         </div>
-                    )}
+                    </div>
 
-                    <div style={styles.bullets}>
-                        <div style={styles.bullet}>
-                            <div style={styles.dot} />
-                            <div>
-                                <div style={styles.bulletTitle}>Short questionnaire</div>
-                                <div style={styles.bulletBody}>
-                                    Approximately three to five minutes.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style={styles.bullet}>
-                            <div style={styles.dot} />
-                            <div>
-                                <div style={styles.bulletTitle}>Evidence informed insights</div>
-                                <div style={styles.bulletBody}>
-                                    Results summarize population patterns and research associations.
-                                    They do not predict individual outcomes.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style={styles.bullet}>
-                            <div style={styles.dot} />
-                            <div>
-                                <div style={styles.bulletTitle}>Practical clarity</div>
-                                <div style={styles.bulletBody}>
-                                    Identify where risk may be reduced and where preparation may be
-                                    appropriate.
-                                </div>
+                    <div style={styles.bullet}>
+                        <div style={styles.dot} />
+                        <div>
+                            <div style={styles.bulletTitle}>Evidence informed insights</div>
+                            <div style={styles.bulletBody}>
+                                Results summarize population patterns and research associations.
+                                They do not predict individual outcomes.
                             </div>
                         </div>
                     </div>
 
-                    <div style={styles.actions}>
-                        <button onClick={onStart} style={styles.primary}>
-                            Start assessment
-                        </button>
-
-                        <div style={styles.micro}>
-                            Informational only. Not medical advice. Not financial advice.
+                    <div style={styles.bullet}>
+                        <div style={styles.dot} />
+                        <div>
+                            <div style={styles.bulletTitle}>Practical clarity</div>
+                            <div style={styles.bulletBody}>
+                                Identify where risk may be reduced and where preparation may be appropriate.
+                            </div>
                         </div>
-                    </div>
-
-                    <div style={styles.schemaLine}>
-                        <span style={styles.schemaLabel}>Loaded schema</span>
-                        <span style={styles.schemaValue}>
-                            {title ? title : "Reflection"}{" "}
-                            {subtitle ? `• ${subtitle}` : ""}
-                        </span>
                     </div>
                 </div>
 
-                {/* Desktop: show preview on the right */}
-                {!isMobile && (
-                    <div style={styles.heroImageWrap}>
-                        <img
-                            src={previewImg}
-                            alt="Assessment preview"
-                            style={styles.heroImage}
-                        />
+                <div style={styles.actions}>
+                    <button onClick={onStart} style={styles.primary}>
+                        Start assessment
+                    </button>
+
+                    <div style={styles.micro}>
+                        Informational only. Not medical advice. Not financial advice.
                     </div>
-                )}
+                </div>
+
+                <div style={styles.schemaLine}>
+                    <span style={styles.schemaLabel}>Loaded schema</span>
+                    <span style={styles.schemaValue}>
+                        {title ? title : "Reflection"} {subtitle ? `• ${subtitle}` : ""}
+                    </span>
+                </div>
             </section>
 
-            <section style={styles.tiles}>
+            {/* Make this a simple 2-up section */}
+            <section style={styles.infoGrid}>
                 <div style={styles.tile}>
                     <div style={styles.tileLabel}>What this is</div>
                     <div style={styles.tileValue}>
-                        A structured assessment informed by public health and behavioral
-                        research, presented in plain language.
+                        A structured assessment informed by public health and behavioral research,
+                        presented in plain language.
                     </div>
                 </div>
 
@@ -154,36 +121,36 @@ export default function Welcome({ title, subtitle, onStart }) {
                         A prediction tool. Medical advice. Financial advice.
                     </div>
                 </div>
+            </section>
 
-                <div style={styles.newsletterTile}>
-                    <div style={styles.tileLabel}>Monthly research letter</div>
+            {/* Newsletter is now its own full-width section at the bottom */}
+            <section style={styles.newsletterSection}>
+                <div style={styles.tileLabel}>Monthly research letter</div>
 
-                    <div style={styles.newsletterCopy}>
-                        One monthly email with new longevity research, clear summaries, and
-                        practical habits. Unsubscribe anytime.
+                <div style={styles.newsletterCopy}>
+                    One monthly email with new longevity research, clear summaries, and practical habits.
+                    Unsubscribe anytime.
+                </div>
+
+                <div style={styles.embedShell}>
+                    <div style={styles.embedCenter}>
+                        <iframe
+                            src={BEEHIIV_FORM_URL}
+                            className="beehiiv-embed"
+                            data-test-id="beehiiv-embed"
+                            frameBorder="0"
+                            scrolling="no"
+                            title="Decide to Live newsletter signup"
+                            style={{
+                                ...styles.embedFrame,
+                                height: isMobile ? 220 : 185, // match your new embed height + a little mobile cushion
+                            }}
+                        />
                     </div>
+                </div>
 
-                    <div style={styles.embedShell}>
-                        <div style={styles.embedCenter}>
-                            <iframe
-                                src={BEEHIIV_FORM_URL}
-                                className="beehiiv-embed"
-                                data-test-id="beehiiv-embed"
-                                frameBorder="0"
-                                scrolling="no"
-                                title="Decide to Live newsletter signup"
-                                style={{
-                                    ...styles.embedFrame,
-                                    height: isMobile ? 280 : 210, // fixes overlap on mobile
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    <div style={styles.newsletterFinePrint}>
-                        If the form looks slightly different, that is normal. The signup is
-                        hosted by Beehiiv for deliverability and unsubscribe compliance.
-                    </div>
+                <div style={styles.newsletterFinePrint}>
+                    The signup is hosted by Beehiiv for deliverability and unsubscribe compliance.
                 </div>
             </section>
         </div>
@@ -192,7 +159,6 @@ export default function Welcome({ title, subtitle, onStart }) {
 
 const styles = {
     wrap: { paddingTop: 18 },
-
     header: { marginBottom: 16 },
 
     brandRow: {
@@ -247,18 +213,34 @@ const styles = {
         border: "1px solid var(--border)",
         background: "var(--panel)",
         boxShadow: "var(--shadow)",
-        display: "grid",
-        gap: 16,
+        display: "flex",
+        flexDirection: "column",
+        gap: 14,
     },
-
-    heroText: { minWidth: 0 },
 
     sectionTitle: {
         fontSize: 12,
         letterSpacing: 0.5,
         textTransform: "uppercase",
         color: "var(--muted)",
-        marginBottom: 12,
+    },
+
+    // Smaller preview card: cap width and center it
+    previewCard: {
+        borderRadius: 16,
+        border: "1px solid rgba(18,18,18,0.08)",
+        background: "rgba(250, 249, 246, 0.65)",
+        overflow: "hidden",
+        padding: 10,
+        maxWidth: 560,
+        margin: "0 auto",
+    },
+
+    previewImg: {
+        width: "100%",
+        height: "auto",
+        display: "block",
+        borderRadius: 12,
     },
 
     bullets: {
@@ -286,25 +268,16 @@ const styles = {
         flex: "0 0 auto",
     },
 
-    bulletTitle: {
-        fontSize: 14,
-        fontWeight: 520,
-        color: "rgba(18,18,18,0.92)",
-    },
-    bulletBody: {
-        fontSize: 13,
-        color: "var(--muted)",
-        lineHeight: 1.45,
-        marginTop: 2,
-    },
+    bulletTitle: { fontSize: 14, fontWeight: 520, color: "rgba(18,18,18,0.92)" },
+    bulletBody: { fontSize: 13, color: "var(--muted)", lineHeight: 1.45, marginTop: 2 },
 
     actions: {
-        marginTop: 14,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         gap: 12,
         flexWrap: "wrap",
+        marginTop: 2,
     },
 
     primary: {
@@ -316,21 +289,16 @@ const styles = {
         borderRadius: 12,
     },
 
-    micro: {
-        fontSize: 12,
-        color: "var(--muted)",
-        maxWidth: 420,
-        lineHeight: 1.45,
-    },
+    micro: { fontSize: 12, color: "var(--muted)", maxWidth: 420, lineHeight: 1.45 },
 
     schemaLine: {
-        marginTop: 14,
         fontSize: 12,
         color: "var(--muted)",
         opacity: 0.9,
         display: "flex",
         gap: 8,
         flexWrap: "wrap",
+        marginTop: 2,
     },
 
     schemaLabel: {
@@ -342,26 +310,8 @@ const styles = {
 
     schemaValue: { opacity: 0.9 },
 
-    heroImageWrap: {
-        borderRadius: 16,
-        border: "1px solid rgba(18,18,18,0.08)",
-        background: "rgba(250, 249, 246, 0.65)",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 10,
-    },
-
-    heroImage: {
-        width: "100%",
-        height: "auto",
-        display: "block",
-        borderRadius: 12,
-    },
-
-    // Responsive tiles without media queries
-    tiles: {
+    // NEW: 2-up info grid only
+    infoGrid: {
         marginTop: 14,
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
@@ -369,13 +319,6 @@ const styles = {
     },
 
     tile: {
-        borderRadius: 16,
-        border: "1px solid rgba(18, 18, 18, 0.10)",
-        background: "rgba(255,255,255,0.55)",
-        padding: 14,
-    },
-
-    newsletterTile: {
         borderRadius: 16,
         border: "1px solid rgba(18, 18, 18, 0.10)",
         background: "rgba(255,255,255,0.55)",
@@ -390,10 +333,15 @@ const styles = {
         marginBottom: 6,
     },
 
-    tileValue: {
-        fontSize: 14,
-        lineHeight: 1.5,
-        color: "rgba(18,18,18,0.90)",
+    tileValue: { fontSize: 14, lineHeight: 1.5, color: "rgba(18,18,18,0.90)" },
+
+    // NEW: newsletter moved to bottom as a full-width section
+    newsletterSection: {
+        marginTop: 12,
+        borderRadius: 16,
+        border: "1px solid rgba(18, 18, 18, 0.10)",
+        background: "rgba(255,255,255,0.55)",
+        padding: 14,
     },
 
     newsletterCopy: {
@@ -412,18 +360,21 @@ const styles = {
     },
 
     embedCenter: {
-        maxWidth: 460,
+        maxWidth: 520,
         margin: "0 auto",
+        display: "flex",
+        justifyContent: "center",
     },
 
+    // Use your new embed sizing feel, but let it be responsive
     embedFrame: {
         width: "100%",
-        height: 210,
+        maxWidth: 460,        // matches your new embed width, stays centered
+        height: 185,          // matches your embed height
         margin: 0,
-        borderRadius: 12,
+        borderRadius: 17,
         backgroundColor: "transparent",
         boxShadow: "0 0 #0000",
-        maxWidth: "100%",
         display: "block",
     },
 
