@@ -6,16 +6,43 @@ import { fetchSchema } from "../api.js";
 const LIFE_INSURANCE_URL = "https://life-insuance-app.vercel.app/";
 
 function colorToChip(color) {
-    if (color === "green") return { bg: "rgba(205,191,168,0.35)", border: "rgba(18,18,18,0.14)", text: "Protective" };
-    if (color === "yellow") return { bg: "rgba(205,191,168,0.18)", border: "rgba(18,18,18,0.10)", text: "Mixed" };
-    return { bg: "rgba(205,191,168,0.08)", border: "rgba(18,18,18,0.14)", text: "Risk associated" };
+    if (color === "green")
+        return {
+            bg: "rgba(205,191,168,0.35)",
+            border: "rgba(18,18,18,0.14)",
+            text: "Protective",
+        };
+    if (color === "yellow")
+        return {
+            bg: "rgba(205,191,168,0.18)",
+            border: "rgba(18,18,18,0.10)",
+            text: "Mixed",
+        };
+    return {
+        bg: "rgba(205,191,168,0.08)",
+        border: "rgba(18,18,18,0.14)",
+        text: "Risk associated",
+    };
 }
 
 export default function Results({ result, onRestart }) {
     const [schema, setSchema] = useState(null);
 
+    // ✅ Fix mobile column squeeze: stack layout under 900px
+    const [isNarrow, setIsNarrow] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return window.innerWidth < 900;
+    });
+
     React.useEffect(() => {
         fetchSchema().then(setSchema).catch(() => setSchema(null));
+    }, []);
+
+    React.useEffect(() => {
+        if (typeof window === "undefined") return;
+        const onResize = () => setIsNarrow(window.innerWidth < 900);
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
     }, []);
 
     const evidenceMap = useMemo(() => {
@@ -44,7 +71,7 @@ export default function Results({ result, onRestart }) {
                     </button>
                 </div>
 
-                <div style={styles.bandRow}>
+                <div style={{ ...styles.bandRow, ...(isNarrow ? styles.bandRowMobile : null) }}>
                     <div style={styles.dotWrap}>
                         <div style={styles.dotLabel}>Overall indicator</div>
                         <div style={styles.barTrack}>
@@ -62,19 +89,19 @@ export default function Results({ result, onRestart }) {
                 </div>
             </div>
 
-            <div style={styles.grid}>
-                <nav style={styles.nav}>
+            <div style={{ ...styles.grid, ...(isNarrow ? styles.gridMobile : null) }}>
+                <nav style={{ ...styles.nav, ...(isNarrow ? styles.navMobile : null) }}>
                     <div style={styles.navTitle}>Sections</div>
                     {(result.sections || []).map((s) => {
                         const chip = colorToChip(s.color);
-                        const isActive = s.id === active;
+                        const isActiveItem = s.id === active;
                         return (
                             <button
                                 key={s.id}
                                 onClick={() => setActive(s.id)}
                                 style={{
                                     ...styles.navItem,
-                                    ...(isActive ? styles.navItemActive : null),
+                                    ...(isActiveItem ? styles.navItemActive : null),
                                 }}
                             >
                                 <div style={styles.navRow}>
@@ -100,12 +127,12 @@ export default function Results({ result, onRestart }) {
                         <div style={styles.empty}>No section selected.</div>
                     ) : (
                         <div style={styles.sectionCard}>
-                            <div style={styles.sectionHeader}>
+                            <div style={{ ...styles.sectionHeader, ...(isNarrow ? styles.sectionHeaderMobile : null) }}>
                                 <div>
                                     <div style={styles.kicker}>Section</div>
                                     <h3 style={styles.h3}>{activeSection.title}</h3>
                                 </div>
-                                <div style={styles.sectionMeta}>
+                                <div style={{ ...styles.sectionMeta, ...(isNarrow ? styles.sectionMetaMobile : null) }}>
                                     <div style={styles.metaLabel}>Section score</div>
                                     <div style={styles.metaValue}>
                                         {activeSection.score} of {activeSection.range?.max ?? "?"}
@@ -134,9 +161,7 @@ export default function Results({ result, onRestart }) {
 
                             <div style={styles.subTitle}>Evidence</div>
                             {(evidenceMap[activeSection.id] || []).length === 0 ? (
-                                <div style={styles.muted}>
-                                    Evidence links for this section are not available yet.
-                                </div>
+                                <div style={styles.muted}>Evidence links for this section are not available yet.</div>
                             ) : (
                                 <div style={styles.evidenceList}>
                                     {(evidenceMap[activeSection.id] || []).map((e) => (
@@ -153,7 +178,7 @@ export default function Results({ result, onRestart }) {
                                 </div>
                             )}
 
-                            {/* Keep your existing pivot EXACTLY, but wrap it so we can add a new funnel card under it */}
+                            {/* Keep your existing pivot; add funnel under it */}
                             <div style={styles.pivotStack}>
                                 <div style={styles.pivot}>
                                     <div style={styles.pivotText}>{result.pivot.text}</div>
@@ -162,35 +187,31 @@ export default function Results({ result, onRestart }) {
                                     </button>
                                 </div>
 
-                                {/* NEW: Funnel to insurance app (optional + click to learn more) */}
                                 <div style={styles.funnelCard}>
                                     <div style={styles.funnelTop}>
                                         <div>
                                             <div style={styles.funnelKicker}>Optional next step</div>
-                                            <div style={styles.funnelTitle}>See protection options for the life you’re planning</div>
+                                            <div style={styles.funnelTitle}>
+                                                See protection options for the life you’re planning
+                                            </div>
                                         </div>
                                         <span style={styles.funnelChip}>Educational</span>
                                     </div>
 
                                     <div style={styles.funnelBody}>
-                                        If you want, you can explore a quick life insurance estimate using my simple calculator.
-                                        It’s designed to help you compare term vs whole life vs retirement-style scenarios.
-                                        <span style={styles.funnelMuted}> Not a quote, not approval, and not financial advice.</span>
+                                        If you want, you can explore a quick life insurance estimate using my simple calculator. It’s
+                                        designed to help you compare term vs whole life vs retirement-style scenarios.
+                                        <span style={styles.funnelMuted}>
+                                            {" "}
+                                            Not a quote, not approval, and not financial advice.
+                                        </span>
                                     </div>
 
-                                    <div style={styles.funnelActions}>
-                                        <a
-                                            href={LIFE_INSURANCE_URL}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            style={styles.funnelButton}
-                                        >
-                                            Learn more in the Insurance App
+                                    <div style={{ ...styles.funnelActions, ...(isNarrow ? styles.funnelActionsMobile : null) }}>
+                                        <a href={LIFE_INSURANCE_URL} target="_blank" rel="noreferrer" style={styles.funnelButton}>
+                                            Learn more
                                         </a>
-
-                                        <div style={styles.funnelNote}>
-                                            Opens in a new tab • 30 seconds • No account needed
-                                        </div>
+                                        <div style={styles.funnelNote}>Opens in a new tab • 30 seconds • No account needed</div>
                                     </div>
                                 </div>
                             </div>
@@ -244,6 +265,11 @@ const styles = {
         gridTemplateColumns: "1fr 1fr",
         gap: 14,
         alignItems: "start",
+    },
+
+    // ✅ Mobile: stack overview cards
+    bandRowMobile: {
+        gridTemplateColumns: "1fr",
     },
 
     dotWrap: {
@@ -300,6 +326,11 @@ const styles = {
         alignItems: "start",
     },
 
+    // ✅ Mobile: stack nav + content (fixes skinny right column)
+    gridMobile: {
+        gridTemplateColumns: "1fr",
+    },
+
     nav: {
         position: "sticky",
         top: 18,
@@ -308,6 +339,12 @@ const styles = {
         background: "rgba(255,255,255,0.6)",
         boxShadow: "0 10px 24px rgba(18,18,18,0.06)",
         padding: 12,
+    },
+
+    // ✅ Mobile: remove sticky when stacked
+    navMobile: {
+        position: "relative",
+        top: "auto",
     },
 
     navTitle: {
@@ -370,6 +407,10 @@ const styles = {
         marginBottom: 10,
     },
 
+    sectionHeaderMobile: {
+        alignItems: "stretch",
+    },
+
     h3: { margin: "6px 0 0", fontSize: 22, letterSpacing: -0.2 },
 
     sectionMeta: {
@@ -381,10 +422,21 @@ const styles = {
         textAlign: "right",
     },
 
+    sectionMetaMobile: {
+        minWidth: "auto",
+        width: "100%",
+        textAlign: "left",
+    },
+
     metaLabel: { fontSize: 12, color: "var(--muted)" },
     metaValue: { marginTop: 6, fontSize: 16, fontWeight: 700, color: "rgba(18,18,18,0.9)" },
 
-    sectionHeadline: { marginTop: 10, fontSize: 14.5, color: "rgba(18,18,18,0.86)", lineHeight: 1.55 },
+    sectionHeadline: {
+        marginTop: 10,
+        fontSize: 14.5,
+        color: "rgba(18,18,18,0.86)",
+        lineHeight: 1.55,
+    },
 
     subTitle: {
         marginTop: 16,
@@ -420,7 +472,6 @@ const styles = {
         textDecoration: "none",
     },
 
-    // NEW wrapper so your existing pivot stays the same but we can add a second card under it
     pivotStack: {
         marginTop: 18,
         display: "flex",
@@ -452,7 +503,6 @@ const styles = {
         cursor: "pointer",
     },
 
-    // NEW funnel styles (matches your existing palette)
     funnelCard: {
         borderRadius: 16,
         border: "1px solid rgba(18,18,18,0.08)",
@@ -502,9 +552,7 @@ const styles = {
         maxWidth: 720,
     },
 
-    funnelMuted: {
-        color: "var(--muted)",
-    },
+    funnelMuted: { color: "var(--muted)" },
 
     funnelActions: {
         marginTop: 12,
@@ -513,6 +561,12 @@ const styles = {
         justifyContent: "space-between",
         gap: 12,
         flexWrap: "wrap",
+    },
+
+    // ✅ Mobile: make button full-width and note wrap under it
+    funnelActionsMobile: {
+        flexDirection: "column",
+        alignItems: "stretch",
     },
 
     funnelButton: {
@@ -527,6 +581,7 @@ const styles = {
         padding: "10px 14px",
         borderRadius: 12,
         cursor: "pointer",
+        width: "auto",
     },
 
     funnelNote: {
