@@ -842,7 +842,6 @@ const styles = {
         background: "rgba(255,255,255,0.55)",
     },
 
-    // Desktop: show full screenshot
     previewImg: {
         width: "100%",
         height: 360,
@@ -850,10 +849,10 @@ const styles = {
         display: "block",
     },
 
-    // Mobile: fill the frame so it doesn't look tiny
     previewImgMobile: {
-        height: 260,
-        objectFit: "cover",
+        height: 333,
+        objectFit: "contain",
+        background: "white",
     },
 
     previewCaptionRow: {
