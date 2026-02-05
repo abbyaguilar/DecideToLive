@@ -1,8 +1,7 @@
+// frontend/src/pages/Welcome.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import previewImg from "../assets/assessment-preview-horizontal.png";
 import resultsImg from "../assets/results-preview.png";
-// OPTIONAL: add a results preview image later and uncomment next line
-// import resultsImg from "../assets/results-preview.png";
 
 const BEEHIIV_FORM_URL =
     "https://subscribe-forms.beehiiv.com/9a22dc77-4e7b-4fb7-9151-6033aea1c5c8";
@@ -48,8 +47,6 @@ export default function Welcome({ title, subtitle, onStart }) {
     }
 
     const slides = useMemo(() => {
-        // If you later add resultsImg, swap the second item:
-        // { src: resultsImg, caption: "Results overview (sample)" }
         return [
             { src: previewImg, caption: "Assessment questions" },
             { src: resultsImg, caption: "Results analysis" },
@@ -81,18 +78,10 @@ export default function Welcome({ title, subtitle, onStart }) {
                 {/* Desktop nav */}
                 {!isMobile && (
                     <nav style={styles.navLinks}>
-                        <button
-                            type="button"
-                            style={styles.navBtn}
-                            onClick={() => scrollToId("about")}
-                        >
+                        <button type="button" style={styles.navBtn} onClick={() => scrollToId("about")}>
                             About
                         </button>
-                        <button
-                            type="button"
-                            style={styles.navBtn}
-                            onClick={() => scrollToId("faq")}
-                        >
+                        <button type="button" style={styles.navBtn} onClick={() => scrollToId("faq")}>
                             FAQ
                         </button>
                     </nav>
@@ -114,18 +103,10 @@ export default function Welcome({ title, subtitle, onStart }) {
 
                         {menuOpen && (
                             <div style={styles.mobileMenu}>
-                                <button
-                                    type="button"
-                                    style={styles.mobileMenuBtn}
-                                    onClick={() => scrollToId("about")}
-                                >
+                                <button type="button" style={styles.mobileMenuBtn} onClick={() => scrollToId("about")}>
                                     About
                                 </button>
-                                <button
-                                    type="button"
-                                    style={styles.mobileMenuBtn}
-                                    onClick={() => scrollToId("faq")}
-                                >
+                                <button type="button" style={styles.mobileMenuBtn} onClick={() => scrollToId("faq")}>
                                     FAQ
                                 </button>
                             </div>
@@ -138,10 +119,9 @@ export default function Welcome({ title, subtitle, onStart }) {
 
             <header style={styles.header}>
                 <h1 style={styles.h1}>Longevity Assessment</h1>
-
                 <p style={styles.sub}>
-                    A structured overview of factors associated with longevity and
-                    preparedness. Clear, neutral, and designed for responsible planning.
+                    A structured overview of factors associated with longevity and preparedness.
+                    Clear, neutral, and designed for responsible planning.
                 </p>
             </header>
 
@@ -151,12 +131,7 @@ export default function Welcome({ title, subtitle, onStart }) {
                 {/* Preview carousel */}
                 <div style={styles.previewCard}>
                     <div style={styles.carouselTop}>
-                        <button
-                            type="button"
-                            onClick={prevSlide}
-                            aria-label="Previous preview"
-                            style={styles.carouselBtn}
-                        >
+                        <button type="button" onClick={prevSlide} aria-label="Previous preview" style={styles.carouselBtn}>
                             ‹
                         </button>
 
@@ -168,12 +143,7 @@ export default function Welcome({ title, subtitle, onStart }) {
                             />
                         </div>
 
-                        <button
-                            type="button"
-                            onClick={nextSlide}
-                            aria-label="Next preview"
-                            style={styles.carouselBtn}
-                        >
+                        <button type="button" onClick={nextSlide} aria-label="Next preview" style={styles.carouselBtn}>
                             ›
                         </button>
                     </div>
@@ -211,8 +181,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                         body="Where available, each section includes references so you can verify and learn more."
                     />
                     <Bullet
-                        title="No account or credit card required"
-                        body="Your results appear immediately. We do not collect an email address to show results."
+                        title="No email required for results"
+                        body="Your results appear immediately. You can take the assessment without providing an email address."
                     />
                 </div>
 
@@ -222,8 +192,7 @@ export default function Welcome({ title, subtitle, onStart }) {
                     </button>
 
                     <div style={styles.micro}>
-                        Educational only. Not medical advice. Not financial advice. Not a
-                        prediction.
+                        Educational only. Not medical advice. Not financial advice. Not a prediction.
                     </div>
                 </div>
 
@@ -240,8 +209,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                 <div style={styles.tile}>
                     <div style={styles.tileLabel}>What this is</div>
                     <div style={styles.tileValue}>
-                        A structured assessment informed by public health and behavioral
-                        research, presented in plain language.
+                        A structured assessment informed by public health and behavioral research,
+                        presented in plain language.
                     </div>
                 </div>
 
@@ -257,12 +226,10 @@ export default function Welcome({ title, subtitle, onStart }) {
             <section id="about" style={styles.sectionCard}>
                 <div style={styles.tileLabel}>About</div>
                 <div style={styles.sectionBody}>
-                    Decide to Live is a research informed reflection tool that helps you
-                    understand how everyday factors are associated with long term health
-                    outcomes at the population level. It is built to make risk literacy
-                    practical and to support more responsible planning. This tool does not
-                    predict your lifespan and it does not provide medical or financial
-                    advice.
+                    Decide to Live is a research informed reflection tool that helps you understand how everyday factors
+                    are associated with long term health outcomes at the population level. It is built to make risk
+                    literacy practical and to support more responsible planning. This tool does not predict your lifespan
+                    and it does not provide medical or financial advice.
                 </div>
             </section>
 
@@ -273,35 +240,31 @@ export default function Welcome({ title, subtitle, onStart }) {
                 <div style={styles.faqItem}>
                     <div style={styles.faqQ}>Is this a life expectancy calculator</div>
                     <div style={styles.faqA}>
-                        No. This is an educational assessment that summarizes research
-                        associations and highlights where protective or risk associated
-                        factors may be present.
+                        No. This is an educational assessment that summarizes research associations and highlights where
+                        protective or risk associated factors may be present.
                     </div>
                 </div>
 
                 <div style={styles.faqItem}>
                     <div style={styles.faqQ}>Is this medical advice</div>
                     <div style={styles.faqA}>
-                        No. If you have health concerns or want medical guidance, talk with a
-                        licensed clinician.
+                        No. If you have health concerns or want medical guidance, talk with a licensed clinician.
                     </div>
                 </div>
 
                 <div style={styles.faqItem}>
                     <div style={styles.faqQ}>How is the score calculated</div>
                     <div style={styles.faqA}>
-                        Your responses map to simple weights based on the direction of
-                        evidence in the research. The UI score is a normalized indicator for
-                        readability and does not represent a medical outcome.
+                        Your responses map to simple weights based on the direction of evidence in the research. The UI score
+                        is a normalized indicator for readability and does not represent a medical outcome.
                     </div>
                 </div>
 
                 <div style={styles.faqItem}>
                     <div style={styles.faqQ}>Do you store my answers</div>
                     <div style={styles.faqA}>
-                        Not by default. We do not collect an email address to show results.
-                        If you choose to subscribe to the newsletter, Beehiiv will collect
-                        your email for subscription and unsubscribe compliance.
+                        Not by default. We do not collect an email address to show results. If you choose to subscribe to the
+                        newsletter, Beehiiv will collect your email for subscription and unsubscribe compliance.
                     </div>
                 </div>
             </section>
@@ -311,8 +274,7 @@ export default function Welcome({ title, subtitle, onStart }) {
                 <div style={styles.tileLabel}>Monthly research letter</div>
 
                 <div style={styles.newsletterCopy}>
-                    One monthly email with new longevity research, clear summaries, and
-                    practical habits. Unsubscribe anytime.
+                    One monthly email with new longevity research, clear summaries, and practical habits. Unsubscribe anytime.
                 </div>
 
                 <div style={styles.embedShell}>
@@ -327,8 +289,7 @@ export default function Welcome({ title, subtitle, onStart }) {
                 </div>
 
                 <div style={styles.newsletterFinePrint}>
-                    Signup is hosted by Beehiiv for deliverability and unsubscribe
-                    compliance.
+                    Signup is hosted by Beehiiv for deliverability and unsubscribe compliance.
                 </div>
             </section>
 
@@ -338,8 +299,7 @@ export default function Welcome({ title, subtitle, onStart }) {
                     <div>
                         <div style={styles.tileLabel}>Legal</div>
                         <div style={styles.sectionBody}>
-                            Expand to view full Terms of Use and Privacy Policy without leaving
-                            this page.
+                            Expand to view full Terms of Use and Privacy Policy without leaving this page.
                         </div>
                     </div>
 
@@ -359,20 +319,14 @@ export default function Welcome({ title, subtitle, onStart }) {
                             <button
                                 type="button"
                                 onClick={() => setLegalTab("terms")}
-                                style={
-                                    legalTab === "terms" ? styles.legalTabActive : styles.legalTab
-                                }
+                                style={legalTab === "terms" ? styles.legalTabActive : styles.legalTab}
                             >
                                 Terms
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setLegalTab("privacy")}
-                                style={
-                                    legalTab === "privacy"
-                                        ? styles.legalTabActive
-                                        : styles.legalTab
-                                }
+                                style={legalTab === "privacy" ? styles.legalTabActive : styles.legalTab}
                             >
                                 Privacy
                             </button>
@@ -395,18 +349,10 @@ export default function Welcome({ title, subtitle, onStart }) {
                 </div>
 
                 <div style={styles.footerLinks}>
-                    <button
-                        type="button"
-                        style={styles.footerLinkBtn}
-                        onClick={() => openLegal("terms")}
-                    >
+                    <button type="button" style={styles.footerLinkBtn} onClick={() => openLegal("terms")}>
                         Terms
                     </button>
-                    <button
-                        type="button"
-                        style={styles.footerLinkBtn}
-                        onClick={() => openLegal("privacy")}
-                    >
+                    <button type="button" style={styles.footerLinkBtn} onClick={() => openLegal("privacy")}>
                         Privacy
                     </button>
                     <a
@@ -446,76 +392,64 @@ function TermsFull() {
     return (
         <div style={styles.legalInner}>
             <div style={styles.legalH1}>Terms of Use</div>
-            <div style={styles.legalP}>
-                Last updated: {new Date().toLocaleDateString()}
-            </div>
+            <div style={styles.legalP}>Last updated: {new Date().toLocaleDateString()}</div>
 
             <div style={styles.legalP}>
-                Decide to Live provides educational content related to health, lifestyle,
-                and longevity. By accessing or using this site, you agree to these Terms
-                of Use.
+                Decide to Live provides educational content related to health, lifestyle, and longevity. By accessing or using this site,
+                you agree to these Terms of Use.
             </div>
 
             <div style={styles.legalH2}>Educational purposes only</div>
             <div style={styles.legalP}>
-                All content on this site is provided for informational and educational
-                purposes only. It is not medical advice, does not diagnose conditions,
-                and does not replace consultation with a licensed healthcare
-                professional.
+                All content on this site is provided for informational and educational purposes only. It is not medical advice, does not
+                diagnose conditions, and does not replace consultation with a licensed healthcare professional.
             </div>
             <div style={styles.legalP}>
-                Do not disregard professional medical advice or delay seeking care
-                because of information obtained through this site.
+                Do not disregard professional medical advice or delay seeking care because of information obtained through this site.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Assessments and research-based content</div>
             <div style={styles.legalP}>
-                Any quizzes, assessments, or descriptions of “healthy” or “unhealthy”
-                habits are based on population-level research and statistical
-                associations. Individual outcomes vary widely, and no result should be
-                interpreted as a prediction or personalized recommendation.
+                Any quizzes, assessments, or descriptions of “healthy” or “unhealthy” habits are based on population-level research and
+                statistical associations. Individual outcomes vary widely, and no result should be interpreted as a prediction or
+                personalized recommendation.
             </div>
             <div style={styles.legalP}>
-                Links to studies or external resources are provided for reference only.
-                We do not control or guarantee the accuracy of third-party content.
+                Links to studies or external resources are provided for reference only. We do not control or guarantee the accuracy of
+                third-party content.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>No guarantees</div>
             <div style={styles.legalP}>
-                We make no guarantees regarding the accuracy, completeness, or
-                usefulness of any content. Use of the site is at your own risk.
+                We make no guarantees regarding the accuracy, completeness, or usefulness of any content. Use of the site is at your own risk.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Limitation of liability</div>
             <div style={styles.legalP}>
-                To the fullest extent permitted by law, Decide to Live and its creators
-                are not liable for any direct, indirect, incidental, or consequential
-                damages arising from your use of the site or reliance on its content.
+                To the fullest extent permitted by law, Decide to Live and its creators are not liable for any direct, indirect, incidental,
+                or consequential damages arising from your use of the site or reliance on its content.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Newsletter</div>
             <div style={styles.legalP}>
-                If you subscribe to our newsletter, you consent to receive emails related
-                to educational content and site updates. Email delivery and subscription
-                management may be handled by a third-party service provider (such as
-                Beehiiv). You may unsubscribe at any time using the link included in
-                each email.
+                If you subscribe to our newsletter, you consent to receive emails related to educational content and site updates. Email
+                delivery and subscription management may be handled by a third-party service provider (such as Beehiiv). You may unsubscribe
+                at any time using the link included in each email.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Changes to these terms</div>
             <div style={styles.legalP}>
-                We may update these Terms periodically. Continued use of the site after
-                changes indicates acceptance of the updated Terms.
+                We may update these Terms periodically. Continued use of the site after changes indicates acceptance of the updated Terms.
             </div>
 
             <div style={styles.legalDivider} />
@@ -530,8 +464,8 @@ function TermsFull() {
             </div>
 
             <div style={styles.legalFinePrint}>
-                This page is provided for general informational purposes and should be
-                reviewed by legal counsel to ensure compliance with applicable laws.
+                This page is provided for general informational purposes and should be reviewed by legal counsel to ensure compliance with
+                applicable laws.
             </div>
         </div>
     );
@@ -546,37 +480,30 @@ function PrivacyFull() {
             <div style={styles.legalP}>Last updated: {updated}</div>
 
             <div style={styles.legalP}>
-                This Privacy Policy explains how Decide to Live collects, uses, and
-                shares information when you use our site. This site provides educational
-                health and lifestyle content and does not provide medical advice.
+                This Privacy Policy explains how Decide to Live collects, uses, and shares information when you use our site. This site provides
+                educational health and lifestyle content and does not provide medical advice.
             </div>
 
             <div style={styles.legalH2}>Information we collect</div>
 
             <div style={styles.legalH3}>Information you provide</div>
             <div style={styles.legalP}>
-                We collect information you choose to provide, such as your email address
-                when you subscribe to the newsletter or when you contact us.
+                We collect information you choose to provide, such as your email address when you subscribe to the newsletter or when you contact us.
             </div>
 
             <div style={styles.legalH3}>Information collected automatically</div>
             <div style={styles.legalP}>
-                When you visit the site or use the API, certain technical information
-                may be collected automatically by our infrastructure and service
-                providers, such as your IP address, device and browser type, approximate
-                location (derived from IP), timestamps, pages visited, referring/exit
-                pages, and diagnostic logs. This information is typically used for
-                security, performance, and reliability.
+                When you visit the site or use the API, certain technical information may be collected automatically by our infrastructure and service
+                providers, such as your IP address, device and browser type, approximate location (derived from IP), timestamps, pages visited,
+                referring/exit pages, and diagnostic logs. This information is typically used for security, performance, and reliability.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>What we do not collect (quiz answers)</div>
             <div style={styles.legalP}>
-                We do not intentionally store your health/lifestyle quiz responses in a
-                user profile tied to your identity. However, basic technical logs
-                (described above) may still be generated by hosting providers as part of
-                normal site operations.
+                We do not intentionally store your health/lifestyle quiz responses in a user profile tied to your identity. However, basic technical
+                logs (described above) may still be generated by hosting providers as part of normal site operations.
             </div>
 
             <div style={styles.legalDivider} />
@@ -593,94 +520,73 @@ function PrivacyFull() {
 
             <div style={styles.legalH2}>Third-party services we use</div>
             <div style={styles.legalP}>
-                We use third-party services to host and operate our site and
-                communications. These providers may process personal information on our
+                We use third-party services to host and operate our site and communications. These providers may process personal information on our
                 behalf (as “service providers”/processors) to provide their services:
             </div>
 
             <ul style={styles.legalList}>
                 <li>
-                    <span style={styles.legalStrong}>Vercel</span>: may host the front-end
-                    site and process request/diagnostic logs and performance data
-                    necessary to deliver the website.
+                    <span style={styles.legalStrong}>Vercel</span>: may host the front-end site and process request/diagnostic logs and performance data necessary to deliver the website.
                 </li>
                 <li>
-                    <span style={styles.legalStrong}>Render</span>: may host the Flask
-                    back-end/API and process server logs and diagnostics necessary to run
-                    the API.
+                    <span style={styles.legalStrong}>Render</span>: may host the Flask back-end/API and process server logs and diagnostics necessary to run the API.
                 </li>
                 <li>
-                    <span style={styles.legalStrong}>Beehiiv</span>: may collect and store
-                    subscriber email addresses and deliver newsletters (including
-                    unsubscribe handling).
+                    <span style={styles.legalStrong}>Beehiiv</span>: may collect and store subscriber email addresses and deliver newsletters (including unsubscribe handling).
                 </li>
             </ul>
 
             <div style={styles.legalP}>
-                If you add other tools (analytics, error tracking, payments, ads), you
-                should list them here as well and describe what they collect.
+                If you add other tools (analytics, error tracking, payments, ads), you should list them here as well and describe what they collect.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Sharing of information</div>
             <div style={styles.legalP}>
-                We do not sell your personal information. We may share information with
-                service providers (like the ones listed above) strictly to operate the
-                site and newsletter. We may also share information if required by law,
-                or to protect the rights, safety, and integrity of the site.
+                We do not sell your personal information. We may share information with service providers (like the ones listed above) strictly to operate the site and newsletter.
+                We may also share information if required by law, or to protect the rights, safety, and integrity of the site.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Data retention</div>
             <div style={styles.legalP}>
-                We retain personal information only as long as reasonably necessary for
-                the purposes described in this Policy, unless a longer period is
-                required or permitted by law. Newsletter subscribers can unsubscribe at
-                any time. Some operational logs may be retained by infrastructure
-                providers for limited periods for security and debugging.
+                We retain personal information only as long as reasonably necessary for the purposes described in this Policy, unless a longer period is required or permitted by law.
+                Newsletter subscribers can unsubscribe at any time. Some operational logs may be retained by infrastructure providers for limited periods for security and debugging.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Security</div>
             <div style={styles.legalP}>
-                We use reasonable safeguards designed to protect information. No system
-                is completely secure, and we cannot guarantee absolute security.
+                We use reasonable safeguards designed to protect information. No system is completely secure, and we cannot guarantee absolute security.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>California privacy rights</div>
             <div style={styles.legalP}>
-                If you are a California resident, you may have rights to request access
-                to, deletion of, or correction of certain personal information. You may
-                also have rights to opt out of certain “sharing” for cross-context
-                behavioral advertising when applicable. To submit a request, contact us
-                at the email below. We may need to verify your identity before
-                responding.
+                If you are a California resident, you may have rights to request access to, deletion of, or correction of certain personal information.
+                You may also have rights to opt out of certain “sharing” for cross-context behavioral advertising when applicable. To submit a request,
+                contact us at the email below. We may need to verify your identity before responding.
             </div>
             <div style={styles.legalP}>
-                We do not knowingly “sell” personal information. If our practices
-                change, we will update this Policy and provide any required opt-out
-                mechanisms.
+                We do not knowingly “sell” personal information. If our practices change, we will update this Policy and provide any required opt-out mechanisms.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Children’s privacy</div>
             <div style={styles.legalP}>
-                The site is not intended for children under 13, and we do not knowingly
-                collect personal information from children under 13.
+                The site is not intended for children under 13, and we do not knowingly collect personal information from children under 13.
             </div>
 
             <div style={styles.legalDivider} />
 
             <div style={styles.legalH2}>Changes to this policy</div>
             <div style={styles.legalP}>
-                We may update this Privacy Policy from time to time. We will update the
-                “Last updated” date above when changes are made.
+                We may update this Privacy Policy from time to time. We will update the “Last updated” date above when changes are made.
             </div>
 
             <div style={styles.legalDivider} />
@@ -695,9 +601,7 @@ function PrivacyFull() {
             </div>
 
             <div style={styles.legalFinePrint}>
-                This Privacy Policy is a general template. It should match your actual
-                data practices and be reviewed by counsel for compliance with applicable
-                laws.
+                This Privacy Policy is a general template. It should match your actual data practices and be reviewed by counsel for compliance with applicable laws.
             </div>
         </div>
     );
@@ -782,7 +686,7 @@ const styles = {
         position: "absolute",
         right: 0,
         top: 46,
-        width: 200,
+        width: 220,
         borderRadius: 14,
         border: "1px solid rgba(18,18,18,0.10)",
         background: "rgba(255,255,255,0.85)",
@@ -806,13 +710,7 @@ const styles = {
 
     h1: { fontSize: 44, margin: "14px 0 8px", letterSpacing: -0.8 },
 
-    sub: {
-        maxWidth: 760,
-        fontSize: 16,
-        color: "var(--muted)",
-        lineHeight: 1.6,
-        margin: 0,
-    },
+    sub: { maxWidth: 760, fontSize: 16, color: "var(--muted)", lineHeight: 1.6, margin: 0 },
 
     hero: {
         borderRadius: 18,
@@ -825,18 +723,13 @@ const styles = {
         gap: 16,
     },
 
-    sectionTitle: {
-        fontSize: 12,
-        textTransform: "uppercase",
-        letterSpacing: 0.5,
-        color: "var(--muted)",
-    },
+    sectionTitle: { fontSize: 12, textTransform: "uppercase", letterSpacing: 0.5, color: "var(--muted)" },
 
     previewCard: {
         borderRadius: 16,
         border: "1px solid rgba(18,18,18,0.08)",
         background: "rgba(250,249,246,0.65)",
-        padding: 14,
+        padding: "14px 10px",
     },
 
     carouselTop: {
@@ -866,7 +759,14 @@ const styles = {
         background: "rgba(255,255,255,0.55)",
     },
 
-    previewImg: { width: "100%", display: "block" },
+    // ✅ This makes images look GOOD on mobile + still crisp on desktop
+    previewImg: {
+        width: "100%",
+        display: "block",
+        borderRadius: 12,
+        maxWidth: 760,
+        margin: "0 auto",
+    },
 
     previewCaptionRow: {
         marginTop: 10,
@@ -877,10 +777,7 @@ const styles = {
         flexWrap: "wrap",
     },
 
-    previewCaption: {
-        fontSize: 12,
-        color: "rgba(18,18,18,0.6)",
-    },
+    previewCaption: { fontSize: 12, color: "rgba(18,18,18,0.6)" },
 
     dotsRow: { display: "flex", gap: 8, alignItems: "center" },
 
@@ -910,30 +807,13 @@ const styles = {
         border: "1px solid rgba(18,18,18,0.08)",
     },
 
-    dot: {
-        width: 10,
-        height: 10,
-        borderRadius: 999,
-        background: "rgba(205,191,168,1)",
-        marginTop: 6,
-    },
+    dot: { width: 10, height: 10, borderRadius: 999, background: "rgba(205,191,168,1)", marginTop: 6 },
 
     bulletTitle: { fontSize: 14, color: "rgba(18,18,18,0.92)" },
 
-    bulletBody: {
-        fontSize: 13,
-        color: "var(--muted)",
-        marginTop: 2,
-        lineHeight: 1.45,
-    },
+    bulletBody: { fontSize: 13, color: "var(--muted)", marginTop: 2, lineHeight: 1.45 },
 
-    actions: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: 12,
-    },
+    actions: { display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 },
 
     primary: {
         background: "var(--btn)",
@@ -947,13 +827,7 @@ const styles = {
 
     micro: { fontSize: 12, color: "var(--muted)" },
 
-    schemaLine: {
-        fontSize: 12,
-        color: "var(--muted)",
-        display: "flex",
-        gap: 8,
-        flexWrap: "wrap",
-    },
+    schemaLine: { fontSize: 12, color: "var(--muted)", display: "flex", gap: 8, flexWrap: "wrap" },
 
     schemaLabel: {
         padding: "4px 8px",
@@ -964,96 +838,35 @@ const styles = {
 
     schemaValue: { opacity: 0.9 },
 
-    tiles: {
-        marginTop: 16,
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-        gap: 12,
-    },
+    tiles: { marginTop: 16, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12 },
 
-    tile: {
-        borderRadius: 16,
-        padding: 14,
-        border: "1px solid rgba(18,18,18,0.10)",
-        background: "rgba(255,255,255,0.55)",
-    },
+    tile: { borderRadius: 16, padding: 14, border: "1px solid rgba(18,18,18,0.10)", background: "rgba(255,255,255,0.55)" },
 
-    tileLabel: {
-        fontSize: 12,
-        textTransform: "uppercase",
-        letterSpacing: 0.4,
-        color: "var(--muted)",
-        marginBottom: 6,
-    },
+    tileLabel: { fontSize: 12, textTransform: "uppercase", letterSpacing: 0.4, color: "var(--muted)", marginBottom: 6 },
 
     tileValue: { fontSize: 14, lineHeight: 1.5 },
 
-    sectionCard: {
-        marginTop: 16,
-        borderRadius: 16,
-        padding: 16,
-        border: "1px solid rgba(18,18,18,0.10)",
-        background: "rgba(255,255,255,0.55)",
-    },
+    sectionCard: { marginTop: 16, borderRadius: 16, padding: 16, border: "1px solid rgba(18,18,18,0.10)", background: "rgba(255,255,255,0.55)" },
 
-    sectionBody: {
-        fontSize: 14,
-        lineHeight: 1.6,
-        color: "rgba(18,18,18,0.86)",
-    },
+    sectionBody: { fontSize: 14, lineHeight: 1.6, color: "rgba(18,18,18,0.86)" },
 
-    faqItem: {
-        marginTop: 12,
-        paddingTop: 12,
-        borderTop: "1px solid rgba(18,18,18,0.08)",
-    },
+    faqItem: { marginTop: 12, paddingTop: 12, borderTop: "1px solid rgba(18,18,18,0.08)" },
 
     faqQ: { fontSize: 14, color: "rgba(18,18,18,0.92)" },
 
-    faqA: {
-        marginTop: 6,
-        fontSize: 13.5,
-        lineHeight: 1.55,
-        color: "rgba(18,18,18,0.78)",
-    },
+    faqA: { marginTop: 6, fontSize: 13.5, lineHeight: 1.55, color: "rgba(18,18,18,0.78)" },
 
-    newsletter: {
-        marginTop: 18,
-        borderRadius: 16,
-        padding: 16,
-        border: "1px solid rgba(18,18,18,0.10)",
-        background: "rgba(255,255,255,0.55)",
-    },
+    newsletter: { marginTop: 18, borderRadius: 16, padding: 16, border: "1px solid rgba(18,18,18,0.10)", background: "rgba(255,255,255,0.55)" },
 
-    newsletterCopy: {
-        fontSize: 14,
-        marginBottom: 12,
-        color: "rgba(18,18,18,0.80)",
-    },
+    newsletterCopy: { fontSize: 14, marginBottom: 12, color: "rgba(18,18,18,0.80)" },
 
     embedShell: { maxWidth: 520, margin: "0 auto" },
 
-    embedFrame: {
-        width: "100%",
-        height: 190,
-        borderRadius: 16,
-        backgroundColor: "transparent",
-        display: "block",
-    },
+    embedFrame: { width: "100%", height: 190, borderRadius: 16, backgroundColor: "transparent", display: "block" },
 
-    newsletterFinePrint: {
-        marginTop: 10,
-        fontSize: 12,
-        color: "rgba(18,18,18,0.6)",
-        textAlign: "center",
-    },
+    newsletterFinePrint: { marginTop: 10, fontSize: 12, color: "rgba(18,18,18,0.6)", textAlign: "center" },
 
-    legalHeaderRow: {
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        gap: 12,
-    },
+    legalHeaderRow: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 },
 
     legalToggleBtn: {
         border: "1px solid rgba(18,18,18,0.10)",
@@ -1064,128 +877,44 @@ const styles = {
         cursor: "pointer",
     },
 
-    legalBox: {
-        marginTop: 12,
-        borderRadius: 14,
-        border: "1px solid rgba(18,18,18,0.10)",
-        background: "rgba(255,255,255,0.65)",
-        overflow: "hidden",
-    },
+    legalBox: { marginTop: 12, borderRadius: 14, border: "1px solid rgba(18,18,18,0.10)", background: "rgba(255,255,255,0.65)", overflow: "hidden" },
 
-    legalTabs: {
-        display: "flex",
-        gap: 6,
-        padding: 10,
-        borderBottom: "1px solid rgba(18,18,18,0.08)",
-    },
+    legalTabs: { display: "flex", gap: 6, padding: 10, borderBottom: "1px solid rgba(18,18,18,0.08)" },
 
-    legalTab: {
-        border: "1px solid rgba(18,18,18,0.10)",
-        background: "rgba(250,249,246,0.65)",
-        padding: "8px 10px",
-        borderRadius: 999,
-        fontSize: 12,
-        cursor: "pointer",
-    },
+    legalTab: { border: "1px solid rgba(18,18,18,0.10)", background: "rgba(250,249,246,0.65)", padding: "8px 10px", borderRadius: 999, fontSize: 12, cursor: "pointer" },
 
-    legalTabActive: {
-        border: "1px solid rgba(18,18,18,0.14)",
-        background: "rgba(18,18,18,0.90)",
-        color: "white",
-        padding: "8px 10px",
-        borderRadius: 999,
-        fontSize: 12,
-        cursor: "pointer",
-    },
+    legalTabActive: { border: "1px solid rgba(18,18,18,0.14)", background: "rgba(18,18,18,0.90)", color: "white", padding: "8px 10px", borderRadius: 999, fontSize: 12, cursor: "pointer" },
 
-    legalScroll: {
-        maxHeight: 260,
-        overflow: "auto",
-        padding: 12,
-    },
+    legalScroll: { maxHeight: 260, overflow: "auto", padding: 12 },
 
-    legalInner: {
-        fontSize: 12,
-        color: "rgba(18,18,18,0.80)",
-        lineHeight: 1.6,
-    },
+    legalInner: { fontSize: 12, color: "rgba(18,18,18,0.80)", lineHeight: 1.6 },
 
     legalH1: { fontSize: 14, fontWeight: 700, marginBottom: 6 },
-
     legalH2: { fontSize: 13, fontWeight: 700, marginTop: 12, marginBottom: 6 },
-
     legalH3: { fontSize: 12, fontWeight: 700, marginTop: 10, marginBottom: 4 },
-
     legalP: { marginBottom: 8 },
 
-    legalDivider: {
-        height: 1,
-        background: "rgba(18,18,18,0.08)",
-        margin: "10px 0",
-    },
+    legalDivider: { height: 1, background: "rgba(18,18,18,0.08)", margin: "10px 0" },
 
     legalList: { paddingLeft: 18, marginBottom: 8 },
 
     legalStrong: { fontWeight: 700 },
 
-    legalLink: {
-        textDecoration: "underline",
-        textUnderlineOffset: 3,
-        color: "rgba(18,18,18,0.85)",
-    },
+    legalLink: { textDecoration: "underline", textUnderlineOffset: 3, color: "rgba(18,18,18,0.85)" },
 
-    legalFinePrint: {
-        marginTop: 10,
-        fontSize: 11,
-        color: "rgba(18,18,18,0.60)",
-    },
+    legalFinePrint: { marginTop: 10, fontSize: 11, color: "rgba(18,18,18,0.60)" },
 
-    footer: {
-        marginTop: 22,
-        padding: "18px 0 26px",
-        borderTop: "1px solid rgba(18,18,18,0.08)",
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 12,
-        flexWrap: "wrap",
-        alignItems: "flex-start",
-    },
+    footer: { marginTop: 22, padding: "18px 0 26px", borderTop: "1px solid rgba(18,18,18,0.08)", display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "flex-start" },
 
     footerLeft: { maxWidth: 520 },
 
-    footerBrand: {
-        fontSize: 12,
-        letterSpacing: 0.6,
-        textTransform: "uppercase",
-        color: "rgba(18,18,18,0.72)",
-    },
+    footerBrand: { fontSize: 12, letterSpacing: 0.6, textTransform: "uppercase", color: "rgba(18,18,18,0.72)" },
 
-    footerSmall: {
-        marginTop: 6,
-        fontSize: 12,
-        color: "rgba(18,18,18,0.60)",
-        lineHeight: 1.5,
-    },
+    footerSmall: { marginTop: 6, fontSize: 12, color: "rgba(18,18,18,0.60)", lineHeight: 1.5 },
 
     footerLinks: { display: "flex", gap: 14, flexWrap: "wrap" },
 
-    footerLink: {
-        fontSize: 12,
-        color: "rgba(18,18,18,0.70)",
-        textDecoration: "underline",
-        textDecorationColor: "rgba(18,18,18,0.25)",
-        textUnderlineOffset: 4,
-    },
+    footerLink: { fontSize: 12, color: "rgba(18,18,18,0.70)", textDecoration: "underline", textDecorationColor: "rgba(18,18,18,0.25)", textUnderlineOffset: 4 },
 
-    footerLinkBtn: {
-        fontSize: 12,
-        color: "rgba(18,18,18,0.70)",
-        textDecoration: "underline",
-        textDecorationColor: "rgba(18,18,18,0.25)",
-        textUnderlineOffset: 4,
-        background: "transparent",
-        border: "none",
-        padding: 0,
-        cursor: "pointer",
-    },
+    footerLinkBtn: { fontSize: 12, color: "rgba(18,18,18,0.70)", textDecoration: "underline", textDecorationColor: "rgba(18,18,18,0.25)", textUnderlineOffset: 4, background: "transparent", border: "none", padding: 0, cursor: "pointer" },
 };
