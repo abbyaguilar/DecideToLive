@@ -16,7 +16,12 @@ export default function Welcome({ title, subtitle, onStart }) {
     }, []);
 
     return (
+
         <div style={styles.wrap}>
+            <div style={{ fontSize: 12, opacity: 0.6 }}>
+                DEPLOY TEST 02-04
+            </div>
+
             <header style={styles.header}>
                 <div style={styles.brandRow}>
                     <div style={styles.badge}>Research informed longevity tool</div>
