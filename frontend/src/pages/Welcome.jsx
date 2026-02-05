@@ -850,9 +850,11 @@ const styles = {
     },
 
     previewImgMobile: {
-        height: 333,
+        height: 320,
         objectFit: "contain",
-        background: "white",
+        background: "transparent",
+        transform: "scale(1.35)",
+        transformOrigin: "50% 65%",
     },
 
     previewCaptionRow: {
