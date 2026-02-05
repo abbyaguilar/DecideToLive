@@ -1,10 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import previewImg from "../assets/assessment-preview.png";
 
 const BEEHIIV_FORM_URL =
     "https://subscribe-forms.beehiiv.com/9a22dc77-4e7b-4fb7-9151-6033aea1c5c8";
 
 export default function Welcome({ title, subtitle, onStart }) {
+    const [isMobile, setIsMobile] = useState(
+        typeof window !== "undefined" ? window.innerWidth <= 820 : false
+    );
+
+    useEffect(() => {
+        function onResize() {
+            setIsMobile(window.innerWidth <= 820);
+        }
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, []);
+
     useEffect(() => {
         // Required for Beehiiv embed sizing/behavior
         if (!document.getElementById("beehiiv-embed-js")) {
@@ -37,21 +49,39 @@ export default function Welcome({ title, subtitle, onStart }) {
                 <h1 style={styles.h1}>Longevity Assessment</h1>
 
                 <p style={styles.sub}>
-                    A structured overview of factors associated with longevity and preparedness. Clear, neutral, and designed for
-                    responsible planning.
+                    A structured overview of factors associated with longevity and
+                    preparedness. Clear, neutral, and designed for responsible planning.
                 </p>
             </header>
 
-            <section style={styles.hero}>
+            <section
+                style={{
+                    ...styles.hero,
+                    gridTemplateColumns: isMobile ? "1fr" : "1.1fr 0.9fr",
+                }}
+            >
                 <div style={styles.heroText}>
                     <div style={styles.sectionTitle}>What you will receive</div>
+
+                    {/* Mobile: show preview image as a horizontal banner ABOVE the bullets */}
+                    {isMobile && (
+                        <div style={{ ...styles.heroImageWrap, padding: 12 }}>
+                            <img
+                                src={previewImg}
+                                alt="Assessment preview"
+                                style={{ ...styles.heroImage, maxWidth: 520 }}
+                            />
+                        </div>
+                    )}
 
                     <div style={styles.bullets}>
                         <div style={styles.bullet}>
                             <div style={styles.dot} />
                             <div>
                                 <div style={styles.bulletTitle}>Short questionnaire</div>
-                                <div style={styles.bulletBody}>Approximately three to five minutes.</div>
+                                <div style={styles.bulletBody}>
+                                    Approximately three to five minutes.
+                                </div>
                             </div>
                         </div>
 
@@ -60,7 +90,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                             <div>
                                 <div style={styles.bulletTitle}>Evidence informed insights</div>
                                 <div style={styles.bulletBody}>
-                                    Results summarize population patterns and research associations. They do not predict individual outcomes.
+                                    Results summarize population patterns and research associations.
+                                    They do not predict individual outcomes.
                                 </div>
                             </div>
                         </div>
@@ -70,7 +101,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                             <div>
                                 <div style={styles.bulletTitle}>Practical clarity</div>
                                 <div style={styles.bulletBody}>
-                                    Identify where risk may be reduced and where preparation may be appropriate.
+                                    Identify where risk may be reduced and where preparation may be
+                                    appropriate.
                                 </div>
                             </div>
                         </div>
@@ -81,27 +113,38 @@ export default function Welcome({ title, subtitle, onStart }) {
                             Start assessment
                         </button>
 
-                        <div style={styles.micro}>Informational only. Not medical advice. Not financial advice.</div>
+                        <div style={styles.micro}>
+                            Informational only. Not medical advice. Not financial advice.
+                        </div>
                     </div>
 
                     <div style={styles.schemaLine}>
                         <span style={styles.schemaLabel}>Loaded schema</span>
                         <span style={styles.schemaValue}>
-                            {title ? title : "Reflection"} {subtitle ? `• ${subtitle}` : ""}
+                            {title ? title : "Reflection"}{" "}
+                            {subtitle ? `• ${subtitle}` : ""}
                         </span>
                     </div>
                 </div>
 
-                <div style={styles.heroImageWrap}>
-                    <img src={previewImg} alt="Assessment preview" style={styles.heroImage} />
-                </div>
+                {/* Desktop: show preview on the right */}
+                {!isMobile && (
+                    <div style={styles.heroImageWrap}>
+                        <img
+                            src={previewImg}
+                            alt="Assessment preview"
+                            style={styles.heroImage}
+                        />
+                    </div>
+                )}
             </section>
 
             <section style={styles.tiles}>
                 <div style={styles.tile}>
                     <div style={styles.tileLabel}>What this is</div>
                     <div style={styles.tileValue}>
-                        A structured assessment informed by public health and behavioral research, presented in plain language.
+                        A structured assessment informed by public health and behavioral
+                        research, presented in plain language.
                     </div>
                 </div>
 
@@ -116,7 +159,8 @@ export default function Welcome({ title, subtitle, onStart }) {
                     <div style={styles.tileLabel}>Monthly research letter</div>
 
                     <div style={styles.newsletterCopy}>
-                        One monthly email with new longevity research, clear summaries, and practical habits. Unsubscribe anytime.
+                        One monthly email with new longevity research, clear summaries, and
+                        practical habits. Unsubscribe anytime.
                     </div>
 
                     <div style={styles.embedShell}>
@@ -128,14 +172,17 @@ export default function Welcome({ title, subtitle, onStart }) {
                                 frameBorder="0"
                                 scrolling="no"
                                 title="Decide to Live newsletter signup"
-                                style={styles.embedFrame}
+                                style={{
+                                    ...styles.embedFrame,
+                                    height: isMobile ? 280 : 210, // fixes overlap on mobile
+                                }}
                             />
                         </div>
                     </div>
 
                     <div style={styles.newsletterFinePrint}>
-                        If the form looks slightly different, that is normal. The signup is hosted by Beehiiv for deliverability and
-                        unsubscribe compliance.
+                        If the form looks slightly different, that is normal. The signup is
+                        hosted by Beehiiv for deliverability and unsubscribe compliance.
                     </div>
                 </div>
             </section>
@@ -201,7 +248,6 @@ const styles = {
         background: "var(--panel)",
         boxShadow: "var(--shadow)",
         display: "grid",
-        gridTemplateColumns: "1.1fr 0.9fr",
         gap: 16,
     },
 
@@ -240,8 +286,17 @@ const styles = {
         flex: "0 0 auto",
     },
 
-    bulletTitle: { fontSize: 14, fontWeight: 520, color: "rgba(18,18,18,0.92)" },
-    bulletBody: { fontSize: 13, color: "var(--muted)", lineHeight: 1.45, marginTop: 2 },
+    bulletTitle: {
+        fontSize: 14,
+        fontWeight: 520,
+        color: "rgba(18,18,18,0.92)",
+    },
+    bulletBody: {
+        fontSize: 13,
+        color: "var(--muted)",
+        lineHeight: 1.45,
+        marginTop: 2,
+    },
 
     actions: {
         marginTop: 14,
@@ -305,11 +360,11 @@ const styles = {
         borderRadius: 12,
     },
 
-    // FIX: lock to 2 columns on desktop so the two tiles don't shrink unpredictably
+    // Responsive tiles without media queries
     tiles: {
         marginTop: 14,
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
         gap: 12,
     },
 
@@ -321,7 +376,6 @@ const styles = {
     },
 
     newsletterTile: {
-        gridColumn: "1 / -1",
         borderRadius: 16,
         border: "1px solid rgba(18, 18, 18, 0.10)",
         background: "rgba(255,255,255,0.55)",
@@ -336,7 +390,11 @@ const styles = {
         marginBottom: 6,
     },
 
-    tileValue: { fontSize: 14, lineHeight: 1.5, color: "rgba(18,18,18,0.90)" },
+    tileValue: {
+        fontSize: 14,
+        lineHeight: 1.5,
+        color: "rgba(18,18,18,0.90)",
+    },
 
     newsletterCopy: {
         fontSize: 14,
@@ -345,7 +403,6 @@ const styles = {
         marginTop: 6,
     },
 
-    // Make the embed feel centered and intentional
     embedShell: {
         marginTop: 12,
         borderRadius: 14,
