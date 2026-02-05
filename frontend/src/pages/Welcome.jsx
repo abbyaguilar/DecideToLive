@@ -879,7 +879,7 @@ const styles = {
 
     // NEW: on mobile, we scale the viewport slightly (not the image)
     previewInnerMobile: {
-        height: 333,
+        height: 222,
         transform: "scale(1.14)",
         transformOrigin: "50% 60%",
     },
