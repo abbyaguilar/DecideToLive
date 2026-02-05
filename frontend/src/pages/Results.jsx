@@ -3,6 +3,8 @@
 import React, { useMemo, useState } from "react";
 import { fetchSchema } from "../api.js";
 
+const LIFE_INSURANCE_URL = "https://life-insuance-app.vercel.app/";
+
 function colorToChip(color) {
     if (color === "green") return { bg: "rgba(205,191,168,0.35)", border: "rgba(18,18,18,0.14)", text: "Protective" };
     if (color === "yellow") return { bg: "rgba(205,191,168,0.18)", border: "rgba(18,18,18,0.10)", text: "Mixed" };
@@ -151,11 +153,46 @@ export default function Results({ result, onRestart }) {
                                 </div>
                             )}
 
-                            <div style={styles.pivot}>
-                                <div style={styles.pivotText}>{result.pivot.text}</div>
-                                <button onClick={onRestart} style={styles.primary}>
-                                    {result.pivot.cta_label}
-                                </button>
+                            {/* Keep your existing pivot EXACTLY, but wrap it so we can add a new funnel card under it */}
+                            <div style={styles.pivotStack}>
+                                <div style={styles.pivot}>
+                                    <div style={styles.pivotText}>{result.pivot.text}</div>
+                                    <button onClick={onRestart} style={styles.primary}>
+                                        {result.pivot.cta_label}
+                                    </button>
+                                </div>
+
+                                {/* NEW: Funnel to insurance app (optional + click to learn more) */}
+                                <div style={styles.funnelCard}>
+                                    <div style={styles.funnelTop}>
+                                        <div>
+                                            <div style={styles.funnelKicker}>Optional next step</div>
+                                            <div style={styles.funnelTitle}>See protection options for the life you’re planning</div>
+                                        </div>
+                                        <span style={styles.funnelChip}>Educational</span>
+                                    </div>
+
+                                    <div style={styles.funnelBody}>
+                                        If you want, you can explore a quick life insurance estimate using my simple calculator.
+                                        It’s designed to help you compare term vs whole life vs retirement-style scenarios.
+                                        <span style={styles.funnelMuted}> Not a quote, not approval, and not financial advice.</span>
+                                    </div>
+
+                                    <div style={styles.funnelActions}>
+                                        <a
+                                            href={LIFE_INSURANCE_URL}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            style={styles.funnelButton}
+                                        >
+                                            Learn more in the Insurance App
+                                        </a>
+
+                                        <div style={styles.funnelNote}>
+                                            Opens in a new tab • 30 seconds • No account needed
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -199,6 +236,7 @@ const styles = {
         border: "1px solid rgba(18,18,18,0.10)",
         borderRadius: 12,
         padding: "10px 14px",
+        cursor: "pointer",
     },
 
     bandRow: {
@@ -289,6 +327,7 @@ const styles = {
         background: "rgba(250, 249, 246, 0.65)",
         padding: 12,
         marginBottom: 10,
+        cursor: "pointer",
     },
 
     navItemActive: {
@@ -381,8 +420,15 @@ const styles = {
         textDecoration: "none",
     },
 
-    pivot: {
+    // NEW wrapper so your existing pivot stays the same but we can add a second card under it
+    pivotStack: {
         marginTop: 18,
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+    },
+
+    pivot: {
         borderRadius: 16,
         border: "1px solid rgba(18,18,18,0.08)",
         background: "rgba(250, 249, 246, 0.65)",
@@ -403,5 +449,88 @@ const styles = {
         boxShadow: "0 10px 22px rgba(18,18,18,0.14)",
         padding: "10px 14px",
         borderRadius: 12,
+        cursor: "pointer",
+    },
+
+    // NEW funnel styles (matches your existing palette)
+    funnelCard: {
+        borderRadius: 16,
+        border: "1px solid rgba(18,18,18,0.08)",
+        background: "rgba(255,255,255,0.65)",
+        padding: 14,
+        boxShadow: "0 12px 26px rgba(18,18,18,0.06)",
+    },
+
+    funnelTop: {
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "space-between",
+        gap: 12,
+        flexWrap: "wrap",
+    },
+
+    funnelKicker: {
+        fontSize: 12,
+        letterSpacing: 0.5,
+        textTransform: "uppercase",
+        color: "var(--muted)",
+    },
+
+    funnelTitle: {
+        marginTop: 6,
+        fontSize: 15,
+        fontWeight: 750,
+        color: "rgba(18,18,18,0.92)",
+        letterSpacing: -0.1,
+    },
+
+    funnelChip: {
+        fontSize: 11,
+        border: "1px solid rgba(18,18,18,0.10)",
+        padding: "5px 8px",
+        borderRadius: 999,
+        background: "rgba(205,191,168,0.25)",
+        color: "rgba(18,18,18,0.78)",
+        whiteSpace: "nowrap",
+    },
+
+    funnelBody: {
+        marginTop: 10,
+        fontSize: 13.5,
+        color: "rgba(18,18,18,0.82)",
+        lineHeight: 1.55,
+        maxWidth: 720,
+    },
+
+    funnelMuted: {
+        color: "var(--muted)",
+    },
+
+    funnelActions: {
+        marginTop: 12,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 12,
+        flexWrap: "wrap",
+    },
+
+    funnelButton: {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textDecoration: "none",
+        background: "rgba(18,18,18,0.92)",
+        color: "white",
+        border: "1px solid rgba(18,18,18,0.14)",
+        boxShadow: "0 10px 22px rgba(18,18,18,0.12)",
+        padding: "10px 14px",
+        borderRadius: 12,
+        cursor: "pointer",
+    },
+
+    funnelNote: {
+        fontSize: 12,
+        color: "var(--muted)",
     },
 };
