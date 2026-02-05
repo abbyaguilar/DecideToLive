@@ -153,17 +153,22 @@ export default function Welcome({ title, subtitle, onStart }) {
             <section style={styles.hero}>
                 <div style={styles.sectionTitle}>What you will receive</div>
 
-                {/* Preview carousel (tweaked for bigger mobile + subtle V arrows) */}
+                {/* Preview carousel (ONLY change: make mobile feel bigger without weird zoom) */}
                 <div style={styles.previewCard}>
                     <div style={styles.carouselWrap}>
-                        <img
-                            src={slides[slide].src}
-                            alt={slides[slide].caption}
+                        {/* NEW: inner viewport that we scale on mobile (not the image) */}
+                        <div
                             style={{
-                                ...styles.previewImg,
-                                ...(isMobile ? styles.previewImgMobile : null),
+                                ...styles.previewInner,
+                                ...(isMobile ? styles.previewInnerMobile : null),
                             }}
-                        />
+                        >
+                            <img
+                                src={slides[slide].src}
+                                alt={slides[slide].caption}
+                                style={styles.previewImg}
+                            />
+                        </div>
 
                         <button
                             type="button"
@@ -375,14 +380,20 @@ export default function Welcome({ title, subtitle, onStart }) {
                             <button
                                 type="button"
                                 onClick={() => setLegalTab("terms")}
-                                style={legalTab === "terms" ? styles.legalTabActive : styles.legalTab}
+                                style={
+                                    legalTab === "terms" ? styles.legalTabActive : styles.legalTab
+                                }
                             >
                                 Terms
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setLegalTab("privacy")}
-                                style={legalTab === "privacy" ? styles.legalTabActive : styles.legalTab}
+                                style={
+                                    legalTab === "privacy"
+                                        ? styles.legalTabActive
+                                        : styles.legalTab
+                                }
                             >
                                 Privacy
                             </button>
@@ -456,7 +467,9 @@ function TermsFull() {
     return (
         <div style={styles.legalInner}>
             <div style={styles.legalH1}>Terms of Use</div>
-            <div style={styles.legalP}>Last updated: {new Date().toLocaleDateString()}</div>
+            <div style={styles.legalP}>
+                Last updated: {new Date().toLocaleDateString()}
+            </div>
 
             <div style={styles.legalP}>
                 Decide to Live provides educational content related to health, lifestyle,
@@ -468,7 +481,8 @@ function TermsFull() {
             <div style={styles.legalP}>
                 All content on this site is provided for informational and educational
                 purposes only. It is not medical advice, does not diagnose conditions,
-                and does not replace consultation with a licensed healthcare professional.
+                and does not replace consultation with a licensed healthcare
+                professional.
             </div>
             <div style={styles.legalP}>
                 Do not disregard professional medical advice or delay seeking care because
@@ -665,7 +679,8 @@ function PrivacyFull() {
                 to, deletion of, or correction of certain personal information. You may
                 also have rights to opt out of certain “sharing” for cross-context
                 behavioral advertising when applicable. To submit a request, contact us
-                at the email below. We may need to verify your identity before responding.
+                at the email below. We may need to verify your identity before
+                responding.
             </div>
             <div style={styles.legalP}>
                 We do not knowingly “sell” personal information. If our practices change,
@@ -811,7 +826,13 @@ const styles = {
 
     h1: { fontSize: 44, margin: "14px 0 8px", letterSpacing: -0.8 },
 
-    sub: { maxWidth: 760, fontSize: 16, color: "var(--muted)", lineHeight: 1.6, margin: 0 },
+    sub: {
+        maxWidth: 760,
+        fontSize: 16,
+        color: "var(--muted)",
+        lineHeight: 1.6,
+        margin: 0,
+    },
 
     hero: {
         borderRadius: 18,
@@ -824,7 +845,12 @@ const styles = {
         gap: 16,
     },
 
-    sectionTitle: { fontSize: 12, textTransform: "uppercase", letterSpacing: 0.5, color: "var(--muted)" },
+    sectionTitle: {
+        fontSize: 12,
+        textTransform: "uppercase",
+        letterSpacing: 0.5,
+        color: "var(--muted)",
+    },
 
     previewCard: {
         borderRadius: 16,
@@ -833,7 +859,7 @@ const styles = {
         padding: 14,
     },
 
-    // Carousel frame (keeps image big + crops nicely on mobile)
+    // Carousel frame
     carouselWrap: {
         position: "relative",
         borderRadius: 12,
@@ -842,19 +868,29 @@ const styles = {
         background: "rgba(255,255,255,0.55)",
     },
 
-    previewImg: {
+    // NEW: fixed viewport height, so mobile doesn't look tiny
+    previewInner: {
         width: "100%",
         height: 360,
-        objectFit: "contain",
-        display: "block",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     },
 
-    previewImgMobile: {
+    // NEW: on mobile, we scale the viewport slightly (not the image)
+    previewInnerMobile: {
         height: 333,
-        objectFit: "cover",
+        transform: "scale(1.14)",
+        transformOrigin: "50% 60%",
+    },
+
+    // Image stays stable everywhere
+    previewImg: {
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        display: "block",
         background: "transparent",
-        transform: "scale(1.35)",
-        transformOrigin: "50% 65%",
     },
 
     previewCaptionRow: {
@@ -885,18 +921,16 @@ const styles = {
         border: "1px solid rgba(18,18,18,0.22)",
     },
 
-    // Subtle V/chevron arrows
+    // Simple transparent black V arrows
     arrow: {
         position: "absolute",
         top: "50%",
         transform: "translateY(-50%)",
-        width: 34,
-        height: 34,
+        width: 30,
+        height: 30,
         borderRadius: 999,
-        border: "1px solid rgba(18,18,18,0.10)",
-        background: "rgba(18,18,18,0.18)",
-        color: "rgba(18,18,18,0.92)",
-        backdropFilter: "blur(6px)",
+        border: "none",
+        background: "rgba(0,0,0,0.28)",
         cursor: "pointer",
         display: "grid",
         placeItems: "center",
@@ -907,10 +941,10 @@ const styles = {
     arrowRight: { right: 10 },
 
     arrowIcon: {
-        width: 10,
-        height: 10,
-        borderRight: "2px solid rgba(18,18,18,0.85)",
-        borderBottom: "2px solid rgba(18,18,18,0.85)",
+        width: 9,
+        height: 9,
+        borderRight: "2px solid rgba(255,255,255,0.95)",
+        borderBottom: "2px solid rgba(255,255,255,0.95)",
     },
 
     bullets: { display: "flex", flexDirection: "column", gap: 12 },
@@ -924,13 +958,30 @@ const styles = {
         border: "1px solid rgba(18,18,18,0.08)",
     },
 
-    dot: { width: 10, height: 10, borderRadius: 999, background: "rgba(205,191,168,1)", marginTop: 6 },
+    dot: {
+        width: 10,
+        height: 10,
+        borderRadius: 999,
+        background: "rgba(205,191,168,1)",
+        marginTop: 6,
+    },
 
     bulletTitle: { fontSize: 14, color: "rgba(18,18,18,0.92)" },
 
-    bulletBody: { fontSize: 13, color: "var(--muted)", marginTop: 2, lineHeight: 1.45 },
+    bulletBody: {
+        fontSize: 13,
+        color: "var(--muted)",
+        marginTop: 2,
+        lineHeight: 1.45,
+    },
 
-    actions: { display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 },
+    actions: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: 12,
+    },
 
     primary: {
         background: "var(--btn)",
@@ -944,7 +995,13 @@ const styles = {
 
     micro: { fontSize: 12, color: "var(--muted)" },
 
-    schemaLine: { fontSize: 12, color: "var(--muted)", display: "flex", gap: 8, flexWrap: "wrap" },
+    schemaLine: {
+        fontSize: 12,
+        color: "var(--muted)",
+        display: "flex",
+        gap: 8,
+        flexWrap: "wrap",
+    },
 
     schemaLabel: {
         padding: "4px 8px",
@@ -955,11 +1012,27 @@ const styles = {
 
     schemaValue: { opacity: 0.9 },
 
-    tiles: { marginTop: 16, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12 },
+    tiles: {
+        marginTop: 16,
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+        gap: 12,
+    },
 
-    tile: { borderRadius: 16, padding: 14, border: "1px solid rgba(18,18,18,0.10)", background: "rgba(255,255,255,0.55)" },
+    tile: {
+        borderRadius: 16,
+        padding: 14,
+        border: "1px solid rgba(18,18,18,0.10)",
+        background: "rgba(255,255,255,0.55)",
+    },
 
-    tileLabel: { fontSize: 12, textTransform: "uppercase", letterSpacing: 0.4, color: "var(--muted)", marginBottom: 6 },
+    tileLabel: {
+        fontSize: 12,
+        textTransform: "uppercase",
+        letterSpacing: 0.4,
+        color: "var(--muted)",
+        marginBottom: 6,
+    },
 
     tileValue: { fontSize: 14, lineHeight: 1.5 },
 
