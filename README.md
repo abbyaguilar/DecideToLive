@@ -143,18 +143,23 @@ This calculator provides educational estimates only and is not an insurance quot
 ### Landing Page
 
 ![Landing Page](screenshots/homepage.png)
+![Landing Page 2](screenshots/homepage-2.png)
+![Landing Page 3](screenshots/homepage-3.png)
 
 ### Assessment Interface
 
 ![Assessment Interface](screenshots/assessment-flow.png)
+![Assessment Interface 2](screenshots/assessment-flow-2.png)
 
 ### Results Dashboard
 
 ![Results Dashboard](screenshots/results-dashboard.png)
+![Results Dashboard 2](screenshots/results-dashboard-2.png)
 
 ### Life Insurance Education Tool
 
 ![Life Insurance Calculator](screenshots/life-insurance-calculator.png)
+![Life Insurance Calculator 2](screenshots/life-insurance-calculator-2.png)
 
 ---
 
