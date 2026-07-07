@@ -8,6 +8,14 @@ Users complete a multi-section assessment and receive an educational results das
 
 This project combines software development, user experience design, research-informed content organization, and personalized feedback generation.
 
+## Motivation
+
+DecideToLive was created to help users better understand lifestyle factors, long-term planning, and personal decision-making through a more transparent and user-friendly digital experience.
+
+While exploring the intersection of longevity, wellness, and financial preparedness, I wanted to create tools that simplify complex topics and present information in a way that is easier for users to understand.
+
+The goal of this project is to make educational resources more accessible while maintaining transparency around limitations, assumptions, and the difference between education and professional advice.
+
 ## Links
 
 - Live Website: https://decidetolive.co
@@ -56,7 +64,7 @@ The results are designed for educational reflection and are not medical advice, 
 
 ## Additional Educational Tool
 
-As an extension of the DecideToLive experience, I built a separate educational life insurance calculator to demonstrate how personalized inputs can be transformed into useful estimates and comparisons.
+As an extension of the DecideToLive experience, I built a separate educational life insurance calculator to explore financial preparedness and long-term planning. The goal was to create a more transparent and user-friendly way for people to learn about different insurance concepts by transforming personalized inputs into simplified estimates and comparisons before seeking professional guidance.
 
 Life Insurance Education Tool:
 
