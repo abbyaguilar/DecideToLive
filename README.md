@@ -144,7 +144,6 @@ This calculator provides educational estimates only and is not an insurance quot
 
 ![Landing Page](screenshots/homepage.png)
 ![Landing Page 2](screenshots/homepage-2.png)
-![Landing Page 3](screenshots/homepage-3.png)
 
 ### Assessment Interface
 
